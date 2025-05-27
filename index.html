@@ -166,8 +166,19 @@
     const db = firebase.firestore();
     const shoesCollection = db.collection('shoes');
 
+    async function sha256(message) {
+        // Encoder le message en UTF-8
+        const msgBuffer = new TextEncoder().encode(message);
+        // Hacher le message avec SHA-256
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        // Convertir le tableau d'octets en chaîne hexadécimale
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    }
+
     // Password for authentication
-    const PASSWORD = "c0l0";
+    const PASSWORD_HASH = '7cfae86dbdef5b6712ca464daaa4a65fb1c528cc45d4473360b8e9b344c0d67e';
 
     // Store shoes data
     let shoes = [];
@@ -439,9 +450,11 @@
     }
 
     // Check authentication
-    function checkAuth() {
+    async function checkAuth() {
         const passwordInput = document.getElementById('password').value;
-        if (passwordInput === PASSWORD) {
+        const inputHash = await sha256(passwordInput);
+
+        if (inputHash === PASSWORD_HASH) {
             authSection.classList.add('hidden');
             shoeForm.classList.remove('hidden');
 
@@ -613,9 +626,11 @@
     }
 
     // Confirm delete after authentication
-    function confirmDelete() {
+    async function confirmDelete() {
         const passwordInput = document.getElementById('delete-password').value;
-        if (passwordInput === PASSWORD) {
+        const inputHash = await sha256(passwordInput);
+
+        if (inputHash === PASSWORD_HASH) {
             // Afficher un indicateur de chargement
             const deleteBtn = document.querySelector('#delete-modal .bg-red-600');
             const originalText = deleteBtn.innerHTML;
