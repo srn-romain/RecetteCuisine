@@ -348,13 +348,9 @@
 
         if (filteredShoes.length === 0) {
             shoesContainer.innerHTML = `
-            <div class="card-actions absolute top-2 right-2 flex space-x-2">
-                <button onclick="editShoe('${shoe.id}')" class="bg-blue-500 text-white p-2.5 rounded-full hover:bg-blue-600 transition-all shadow-md">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button onclick="openDeleteModal('${shoe.id}')" class="bg-red-500 text-white p-2.5 rounded-full hover:bg-red-600 transition-all shadow-md">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
+            <div class="col-span-full text-center py-10">
+                <i class="fas fa-shoe-prints text-4xl text-gray-300 mb-2"></i>
+                <p class="text-gray-500">Aucune paire trouvée</p>
             </div>
         `;
             return;
@@ -365,7 +361,7 @@
             shoeCard.className = 'shoe-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow relative';
             shoeCard.innerHTML = `
             <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
-                <img src="${shoe.image}" alt="${shoe.brand} ${shoe.model}" class="w-full h-full object-contain">
+                <img src="${shoe.image}" alt="${shoe.brand} ${shoe.model}" class="w-full h-full object-cover">
             </div>
             <div class="p-4">
                 <div class="flex justify-between items-start">
@@ -378,13 +374,13 @@
                 </div>
             </div>
             <div class="card-actions absolute top-2 right-2 flex space-x-2">
-    <button onclick="editShoe('${shoe.id}')" class="bg-blue-500 text-white p-2.5 rounded-full hover:bg-blue-600 transition-all shadow-md">
-        <i class="fas fa-pencil-alt"></i>
-    </button>
-    <button onclick="openDeleteModal('${shoe.id}')" class="bg-red-500 text-white p-2.5 rounded-full hover:bg-red-600 transition-all shadow-md">
-        <i class="fas fa-trash-alt"></i>
-    </button>
-</div>
+                <button onclick="editShoe('${shoe.id}')" class="bg-blue-500 text-white p-2.5 rounded-full hover:bg-blue-600 transition-all shadow-md">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button onclick="openDeleteModal('${shoe.id}')" class="bg-red-500 text-white p-2.5 rounded-full hover:bg-red-600 transition-all shadow-md">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
         `;
             shoesContainer.appendChild(shoeCard);
         });
@@ -553,7 +549,44 @@
         }
     }
 
-    // Save shoe to collection
+    function compressImage(imageDataUrl, maxSizeKB = 990) {
+        return new Promise((resolve) => {
+            // Vérifier si l'image est déjà assez petite
+            if (imageDataUrl.length <= maxSizeKB * 1024) {
+                return resolve(imageDataUrl); // Retourner l'image d'origine si elle est déjà assez petite
+            }
+
+            const img = new Image();
+            img.src = imageDataUrl;
+
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                // Conserver les dimensions d'origine
+                const width = img.width;
+                const height = img.height;
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Commencer avec une qualité élevée
+                let quality = 0.9;
+                let result = canvas.toDataURL('image/jpeg', quality);
+
+                // Réduire la qualité jusqu'à ce que l'image soit assez petite
+                while (result.length > maxSizeKB * 1024 && quality > 0.1) {
+                    quality -= 0.1;
+                    result = canvas.toDataURL('image/jpeg', quality);
+                }
+
+                resolve(result);
+            };
+        });
+    }
+
+    // Modifier la fonction saveShoe pour utiliser la compression
     function saveShoe() {
         const brand = document.getElementById('brand').value.trim();
         const model = document.getElementById('model').value.trim();
@@ -567,75 +600,99 @@
             return;
         }
 
+        // Afficher un indicateur de chargement
+        const submitBtn = document.querySelector('#shoe-form button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Enregistrement...';
+        submitBtn.disabled = true;
+
         // Handle image uploads
         let imageUrl = 'https://via.placeholder.com/300x200?text=Chaussure';
         let logoUrl = 'https://via.placeholder.com/100x30?text=Logo';
 
-        const processImages = (shoeImage, shoeLogo) => {
-            completeSave(brand, model, size, shoeImage, shoeLogo);
+        // Fonction qui finalise la sauvegarde après traitement des images
+        const finalizeSave = async (shoeImage, shoeLogo) => {
+            try {
+                // Compresser les images
+                if (shoeImage !== 'https://via.placeholder.com/300x200?text=Chaussure') {
+                    shoeImage = await compressImage(shoeImage, 900); // 900KB max pour l'image
+                }
+
+                if (shoeLogo !== 'https://via.placeholder.com/100x30?text=Logo') {
+                    shoeLogo = await compressImage(shoeLogo, 100); // 100KB max pour le logo
+                }
+
+                // Créer l'objet chaussure
+                const shoeData = {
+                    brand,
+                    model,
+                    size,
+                    image: shoeImage,
+                    logo: shoeLogo,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                let savePromise;
+
+                if (currentShoeId) {
+                    savePromise = shoesCollection.doc(currentShoeId).update(shoeData);
+                } else {
+                    shoeData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    savePromise = shoesCollection.add(shoeData);
+                }
+
+                await savePromise;
+                closeModal();
+                loadShoes();
+            } catch (error) {
+                console.error("Erreur lors de l'enregistrement:", error);
+                alert("Une erreur est survenue lors de l'enregistrement. Veuillez réessayer.");
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
         };
 
-        // Process shoe image
-        if (imageInput.files && imageInput.files[0]) {
-            const file = imageInput.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                imageUrl = e.target.result;
-
-                // Process logo after shoe image is loaded
-                if (logoInput.files && logoInput.files[0]) {
-                    const logoFile = logoInput.files[0];
-                    const logoReader = new FileReader();
-
-                    logoReader.onload = function(e) {
-                        logoUrl = e.target.result;
-                        processImages(imageUrl, logoUrl);
-                    };
-
-                    logoReader.readAsDataURL(logoFile);
-                } else {
-                    // If no new logo is provided and we're editing, keep the existing logo
-                    if (currentShoeId) {
-                        const existingShoe = shoes.find(s => s.id === currentShoeId);
-                        if (existingShoe && existingShoe.logo) {
-                            logoUrl = existingShoe.logo;
-                        }
-                    }
-                    processImages(imageUrl, logoUrl);
-                }
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            // If no new image is provided and we're editing, keep the existing image
+        // Traitement des images
+        const processImages = async () => {
+            // Si on est en mode édition et pas de nouvel upload
             if (currentShoeId) {
                 const existingShoe = shoes.find(s => s.id === currentShoeId);
                 if (existingShoe) {
-                    imageUrl = existingShoe.image;
-
-                    // Also keep existing logo if no new one is provided
-                    if (existingShoe.logo && (!logoInput.files || !logoInput.files[0])) {
+                    if (!imageInput.files || !imageInput.files[0]) {
+                        imageUrl = existingShoe.image;
+                    }
+                    if (!logoInput.files || !logoInput.files[0]) {
                         logoUrl = existingShoe.logo;
                     }
                 }
             }
 
-            // Process logo if a new one is provided
-            if (logoInput.files && logoInput.files[0]) {
-                const logoFile = logoInput.files[0];
-                const logoReader = new FileReader();
-
-                logoReader.onload = function(e) {
-                    logoUrl = e.target.result;
-                    processImages(imageUrl, logoUrl);
-                };
-
-                logoReader.readAsDataURL(logoFile);
-            } else {
-                processImages(imageUrl, logoUrl);
+            // Traitement de l'image principale
+            if (imageInput.files && imageInput.files[0]) {
+                imageUrl = await readFileAsDataURL(imageInput.files[0]);
             }
-        }
+
+            // Traitement du logo
+            if (logoInput.files && logoInput.files[0]) {
+                logoUrl = await readFileAsDataURL(logoInput.files[0]);
+            }
+
+            // Finaliser la sauvegarde
+            await finalizeSave(imageUrl, logoUrl);
+        };
+
+        // Lire un fichier comme DataURL
+        const readFileAsDataURL = (file) => {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.readAsDataURL(file);
+            });
+        };
+
+        // Lancer le processus
+        processImages();
     }
 
     function completeSave(brand, model, size, imageUrl, logoUrl) {
