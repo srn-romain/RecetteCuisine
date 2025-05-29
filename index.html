@@ -461,12 +461,12 @@
                 ${shoe.logo ? `<img src="${shoe.logo}" alt="Logo ${shoe.brand}" class="h-14 w-14 object-contain">` : ''}
             </div>
         </div>
-        <div class="card-actions absolute top-2 right-2 flex space-x-1">
-            <button onclick="editShoe('${shoe.id}')" class="bg-[#A1835B]-500 text-white p-2 rounded-full hover:bg-[#A1835B]-600 transition-colors">
-                <i class="fas fa-pencil-alt text-xs"></i>
+        <div class="card-actions absolute top-2 right-2 flex space-x-2">
+            <button onclick="editShoe('${shoe.id}')" class="bg-[#A1835B] text-white p-2.5 rounded-full hover:bg-[#8A6E4A] transition-all shadow-md">
+                <i class="fas fa-pencil-alt"></i>
             </button>
-            <button onclick="openDeleteModal('${shoe.id}')" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors">
-                <i class="fas fa-trash-alt text-xs"></i>
+            <button onclick="openDeleteModal('${shoe.id}')" style="background-color: #A0522D" class="hover:bg-[#874326] text-white p-2.5 rounded-full transition-all shadow-md">
+                <i class="fas fa-trash-alt"></i>
             </button>
         </div>
     `;
