@@ -7,9 +7,7 @@
     <link href="favicon.png" rel="icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase App (la base) est toujours nécessaire -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <!-- Ajouter les services Firebase que vous souhaitez utiliser -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <style>
         .shoe-card:hover .card-actions {
@@ -83,10 +81,10 @@
     <!-- Header -->
     <header class="flex flex-col md:flex-row justify-between items-center mb-8">
         <div>
-            <h1 class="text-3xl font-bold text-indigo-700">Le ShoesLab 👟 </h1>
+            <h1 class="text-3xl font-bold" style="color: #5E473A">Le ShoesLab 👟</h1>
             <p class="text-gray-600" id="total-shoes">0 paires</p>
         </div>
-        <button onclick="openAddModal()" class="mt-4 md:mt-0 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center">
+        <button onclick="openAddModal()" class="bg-[#A1835B] text-white px-4 py-2 rounded-lg flex items-center mt-4 md:mt-0 transition-colors duration-300 hover:bg-[#8A6E4A] hover:shadow-md">
             <i class="fas fa-plus mr-2"></i> Ajouter une paire
         </button>
     </header>
@@ -94,11 +92,11 @@
     <!-- Search and Filter -->
     <div class="mb-8">
         <div class="relative mb-4">
-            <input type="text" id="search" placeholder="Rechercher par modèle ou marque..." class="w-full p-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <input type="text" id="search" placeholder="Rechercher par modèle ou marque..." class="w-full p-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#A1835B]-500 focus:border-[#A1835B]-500">
             <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
         </div>
         <div class="flex flex-wrap gap-2">
-            <button onclick="filterByBrand('all')" class="filter-btn active bg-indigo-600 text-white px-3 py-1 rounded-full text-sm">Toutes</button>
+            <button onclick="filterByBrand('all')" class="filter-btn active bg-[#A1835B] text-white px-3 py-1 rounded-full text-sm">Toutes</button>
             <!-- Brand filters will be added dynamically -->
         </div>
     </div>
@@ -126,7 +124,7 @@
                 <p class="text-sm text-gray-600 mb-2">Veuillez vous authentifier pour continuer</p>
                 <input type="password" id="password" placeholder="Mot de passe" class="w-full p-2 border rounded">
                 <p id="auth-error" class="text-red-500 text-sm mt-1 hidden">Mot de passe incorrect</p>
-                <button onclick="checkAuth()" class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded">Valider</button>
+                <button onclick="checkAuth()" class="mt-2 bg-[#A1835B] text-white px-4 py-2 rounded">Valider</button>
             </div>
 
             <form id="shoe-form" class="hidden">
@@ -156,7 +154,7 @@
                 </div>
                 <div class="flex justify-end space-x-2">
                     <button type="button" onclick="closeModal()" class="px-4 py-2 border rounded">Annuler</button>
-                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Enregistrer</button>
+                    <button type="submit" class="bg-[#A1835B] text-white px-4 py-2 rounded">Enregistrer</button>
                 </div>
             </form>
         </div>
@@ -374,10 +372,10 @@
                 </div>
             </div>
             <div class="card-actions absolute top-2 right-2 flex space-x-2">
-                <button onclick="editShoe('${shoe.id}')" class="bg-blue-500 text-white p-2.5 rounded-full hover:bg-blue-600 transition-all shadow-md">
+                <button onclick="editShoe('${shoe.id}')" class="bg-[#A1835B] text-white p-2.5 rounded-full hover:bg-[#A1835B]-600 transition-all shadow-md">
                     <i class="fas fa-pencil-alt"></i>
                 </button>
-                <button onclick="openDeleteModal('${shoe.id}')" class="bg-red-500 text-white p-2.5 rounded-full hover:bg-red-600 transition-all shadow-md">
+                <button onclick="openDeleteModal('${shoe.id}')" style="background-color: #A0522D" class="hover:bg-[#874326] text-white p-2.5 rounded-full transition-all shadow-md">
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </div>
@@ -416,18 +414,20 @@
     function filterByBrand(brand) {
         // Update active filter button
         document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('bg-indigo-600', 'text-white');
+            btn.classList.remove('bg-[#A1835B]', 'text-white');
             btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
         });
 
         if (brand === 'all') {
-            document.querySelector('.filter-btn').classList.add('bg-indigo-600', 'text-white');
+            // Cibler spécifiquement le premier bouton (Toutes)
+            document.querySelector('.filter-btn:first-child').classList.remove('bg-gray-200', 'hover:bg-gray-300');
+            document.querySelector('.filter-btn:first-child').classList.add('bg-[#A1835B]', 'text-white');
             renderShoes();
         } else {
             const activeBtn = [...document.querySelectorAll('.filter-btn')].find(btn => btn.textContent === brand);
             if (activeBtn) {
-                activeBtn.classList.add('bg-indigo-600', 'text-white');
                 activeBtn.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+                activeBtn.classList.add('bg-[#A1835B]', 'text-white');
             }
 
             const filteredShoes = shoes.filter(shoe => shoe.brand === brand);
@@ -449,7 +449,7 @@
                 shoeCard.className = 'shoe-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow relative';
                 shoeCard.innerHTML = `
         <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
-            <img src="${shoe.image}" alt="${shoe.brand} ${shoe.model}" class="w-full h-full object-contain">
+            <img src="${shoe.image}" alt="${shoe.brand} ${shoe.model}" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
             <div class="flex justify-between items-start">
@@ -462,7 +462,7 @@
             </div>
         </div>
         <div class="card-actions absolute top-2 right-2 flex space-x-1">
-            <button onclick="editShoe('${shoe.id}')" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors">
+            <button onclick="editShoe('${shoe.id}')" class="bg-[#A1835B]-500 text-white p-2 rounded-full hover:bg-[#A1835B]-600 transition-colors">
                 <i class="fas fa-pencil-alt text-xs"></i>
             </button>
             <button onclick="openDeleteModal('${shoe.id}')" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors">
