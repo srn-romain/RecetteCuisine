@@ -96,7 +96,11 @@
     <header class="flex flex-col md:flex-row justify-between items-center mb-8">
         <div>
             <h1 class="text-3xl font-bold" style="color: #5E473A">Le ShoesLab 👟</h1>
-            <p class="text-gray-600" id="total-shoes">0 paires</p>
+            <div class="flex space-x-3 text-gray-600">
+                <p id="total-shoes">0 paires</p>
+                <span>•</span>
+                <p id="total-brands">0 marques</p>
+            </div>
         </div>
         <button onclick="openAddModal()" class="bg-[#A1835B] text-white px-4 py-2 rounded-lg flex items-center mt-4 md:mt-0 transition-colors duration-300 hover:bg-[#8A6E4A] hover:shadow-md">
             <i class="fas fa-plus mr-2"></i> Ajouter une paire
@@ -309,6 +313,7 @@
                 });
                 renderShoes();
                 updateTotalShoes();
+                updateTotalBrands();
                 updateBrandFilters();
             })
             .catch((error) => {
@@ -411,6 +416,13 @@
     // Update total shoes count
     function updateTotalShoes() {
         totalShoesElement.textContent = `${shoes.length} ${shoes.length === 1 ? 'paire' : 'paires'}`;
+    }
+
+    // Update total brands count
+    function updateTotalBrands() {
+        const uniqueBrands = new Set(shoes.map(shoe => shoe.brand));
+        const brandsCount = uniqueBrands.size;
+        document.getElementById('total-brands').textContent = `${brandsCount} ${brandsCount === 1 ? 'marque' : 'marques'}`;
     }
 
     // Update brand filters
