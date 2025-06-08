@@ -145,6 +145,8 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Ajouter des plats ici -->
         </div>
     </div>
 </section>
@@ -171,7 +173,7 @@
                 </div>
             </div>
 
-            <!-- Dessert 1 -->
+            <!-- Dessert 2 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
                 <img src="cookie.jpg" alt="Mousse au chocolat"
                      class="w-full h-48 object-cover">
@@ -188,7 +190,24 @@
                 </div>
             </div>
 
-            <!-- Ajouter 5 autres desserts ici -->
+            <!-- Dessert 3 -->
+            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                <img src="fraisier.jpg" alt="Bavarois à la Fraise"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Bavarois à la Fraise</h3>
+                    <div class="flex justify-between text-sm text-gray-600 mb-3">
+                        <span>1 h</span>
+                        <span>6 personnes</span>
+                    </div>
+                    <button onclick="openRecipe('fraisier')"
+                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                        Voir la recette
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ajouter des desserts ici -->
         </div>
     </div>
 </section>
@@ -215,7 +234,7 @@
                 </div>
             </div>
 
-            <!-- Ajouter 5 autres boissons ici -->
+            <!-- Ajouter des boissons ici -->
         </div>
     </div>
 </section>
@@ -365,6 +384,44 @@
                     "Melangez dans l'ordre tous ces ingrédients jusqu'au pepites de chocolat",
                     "Lorsque la pâte est souple, ajoutez les pépites de chocolat",
                     "Enfournez à 180°C pendant 10-12 minutes",
+                ]
+            },
+            'fraisier': {
+                title: "Bavarois à la Fraise",
+                image: "fraisier.jpg",
+                ingredients: [
+                    "Pour la génoise :",
+                    "2 œufs",
+                    "75g de sucre",
+                    "70g de farine",
+                    "4cl de lait",
+                    "<b>Pour la mousse à la fraise :</b>",
+                    "500g de fraises",
+                    "80g de sucre",
+                    "5 feuilles de gélatine",
+                    "40cl de crème fluide entière",
+                    "50g de sucre glace",
+                    "Pour le miroir :",
+                    "250g de fraises",
+                    "50g de sucre",
+                    "2 feuilles de gélatine"
+                ],
+                preparation: [
+                    "Préparez la génoise. Séparez les blancs des jaunes d'œuf. Ajoutez le sucre, la farine et le lait aux jaunes.",
+                    "Montez les blancs en neige et les incorporez les délicatement à la préparation précédente.",
+                    "Versez la pâte dans un moule beurré et faites cuire 12 minutes à 200° sans préchauffer le four.",
+                    "Placez la génoise sur un plat de service avec un cercle pâtissier autour.",
+                    "Préparez la mousse à la fraise. Équeutez et lavez les fraises. Mixez les avec le sucre en poudre.",
+                    "Faites ramollir la gélatine dans un bol d'eau froide.",
+                    "Pendant ce temps, mettez la purée de fraises obtenue à chauffer dans une casserole. Une fois la gélatine bien molle, faites la dissoudre dans la purée de fraises. Laissez tiédir.",
+                    "Battez au fouet électrique la crème fluide et le sucre glace.",
+                    "Ajoutez délicatement les fraises à la chantilly et mélangez bien.",
+                    "Versez la mousse à la fraise sur la génoise et réservez au moins 2 heures au frigo avant de poursuivre.",
+                    "Préparez le miroir. Équeutez et lavez les fraises. Mixez les avec le sucre.",
+                    "Faites ramollir la gélatine dans un bol d'eau froide.",
+                    "Pendant ce temps, mettez la purée de fraises à chauffer dans une casserole. Une fois la gélatine bien molle, la faire dissoudre dans la purée de fruits. Laissez tiédir.",
+                    "Versez le miroir sur la mousse à la fraise et réservez au moins 4 heures au frigo avant de démouler.",
+                    "Pour démouler, passez un couteau lisse tout autour du cercle pour décoller la mousse et levez doucement. Décorez avec quelques fraises supplémentaires."
                 ]
             },
             'mojito': {
