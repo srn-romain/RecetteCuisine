@@ -3,902 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La ShoesRoom</title>
-    <link href="favicon.png" rel="icon">
+    <title>Savoureux</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="favicon.png" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <style>
-        .shoe-card:hover .card-actions {
-            opacity: 1;
-        }
-        .card-actions {
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-        .modal {
-            transition: opacity 0.3s ease;
-        }
-        .fade-in {
-            animation: fadeIn 0.3s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .image-preview {
-            max-height: 150px;
-            object-fit: contain;
-            margin-top: 10px;
-            display: none;
-        }
-        .logo-preview {
-            max-height: 30px;
-            object-fit: contain;
-            margin-top: 10px;
-            display: none;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f5f0;
+            overflow-x: hidden;
+            color: #333;
         }
 
-        .custom-file-upload {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            background-color: #f3f4f6;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-bg {
+            background-color: #50644c;
+        }
+
+        .recipe-card {
             transition: all 0.3s ease;
-            color: #4b5563;
-            text-align: center;
+            transform-style: preserve-3d;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .category-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
             width: 100%;
         }
 
-        .custom-file-upload:hover {
-            background-color: #e5e7eb;
-            color: #1f2937;
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
         }
 
-        .custom-file-upload i {
-            margin-right: 0.5rem;
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 100%;
         }
 
-        .card-actions button {
-            transform: scale(1);
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .card-actions button:hover {
-            transform: scale(1.2);
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        #image-viewer-modal {
-            transition: opacity 0.3s ease;
-        }
-
-        #image-viewer-modal img {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        #image-viewer-modal.show img {
-            transform: scale(1);
-        }
-
-        .modal-content {
-            max-height: 90vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch; /* Pour une meilleure inertie de défilement sur iOS */
-        }
-
-        .modal-actions {
-            position: sticky;
-            bottom: 0;
-            background-color: white;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            border-top: 1px solid #e5e7eb;
-            margin-top: 0.5rem;
+        @media (min-width: 768px) {
+            .carousel-item {
+                width: 33.333%;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-<div class="container mx-auto px-4 py-8">
-    <!-- Header -->
-    <header class="flex flex-col md:flex-row justify-between items-center mb-8">
-        <div>
-            <h1 class="text-3xl font-bold" style="color: #5E473A">Le ShoesLab 👟</h1>
-            <div class="flex space-x-3 text-gray-600">
-                <p id="total-shoes">0 paires</p>
-                <span>•</span>
-                <p id="total-brands">0 marques</p>
-            </div>
+<body class="min-h-screen">
+<!-- Navigation simplifiée -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center">
+        <div class="text-2xl font-bold text-green-800 mb-2 md:mb-0 md:mr-8">Savoureux</div>
+        <div class="flex space-x-4">
+            <a href="index.html" class="px-3 py-2 rounded-md bg-amber-500 text-white">Accueil</a>
+            <a href="plat.html" class="px-3 py-2">Repas Étudiant</a>
+            <a href="dessert.html" class="px-3 py-2">Desserts</a>
+            <a href="boisson.html" class="px-3 py-2">Boissons</a>
         </div>
-        <button onclick="openAddModal()" class="bg-[#A1835B] text-white px-4 py-2 rounded-lg flex items-center mt-4 md:mt-0 transition-colors duration-300 hover:bg-[#8A6E4A] hover:shadow-md">
-            <i class="fas fa-plus mr-2"></i> Ajouter une paire
-        </button>
-    </header>
+    </nav>
+</header>
 
-    <!-- Search and Filter -->
-    <div class="mb-8">
-        <div class="relative mb-4">
-            <input type="text" id="search" placeholder="Rechercher par modèle ou marque..." class="w-full p-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#A1835B]-500 focus:border-[#A1835B]-500">
-            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-        </div>
-        <div class="flex flex-wrap gap-2">
-            <button onclick="filterByBrand('all')" class="filter-btn active bg-[#A1835B] text-white px-3 py-1 rounded-full text-sm">Toutes</button>
-            <!-- Brand filters will be added dynamically -->
-        </div>
-    </div>
-
-    <!-- Shoes Grid -->
-    <div id="shoes-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <!-- Shoes cards will be added here -->
-        <div class="col-span-full text-center py-10">
-            <i class="fas fa-spinner fa-spin text-4xl text-gray-300 mb-2"></i>
-            <p class="text-gray-500">Chargement des données...</p>
+<!-- Hero Section avec les 3 catégories principales -->
+<section class="py-16 md:py-24 hero-bg text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Recettes Faciles et Savoureuses</h1>
+        <p class="text-xl max-w-2xl mx-auto mb-8">Découvrez des recettes simples pour tous les jours</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <a href="plat.html" class="bg-white text-green-800 p-6 rounded-lg shadow-md hover:bg-green-100 transition-colors">
+                <h2 class="text-xl font-bold mb-2">Repas Étudiant</h2>
+                <p>Économiques et rapides</p>
+            </a>
+            <a href="dessert.html" class="bg-white text-green-800 p-6 rounded-lg shadow-md hover:bg-green-100 transition-colors">
+                <h2 class="text-xl font-bold mb-2">Desserts</h2>
+                <p>Douceurs maison</p>
+            </a>
+            <a href="boisson.html" class="bg-white text-green-800 p-6 rounded-lg shadow-md hover:bg-green-100 transition-colors">
+                <h2 class="text-xl font-bold mb-2">Boissons</h2>
+                <p>Rafraîchissantes</p>
+            </a>
         </div>
     </div>
+</section>
 
-    <!-- Add/Edit Shoe Modal -->
-    <div id="shoe-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg p-6 w-full max-w-md fade-in max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold" id="modal-title">Ajouter une paire</h3>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+<!-- Section de suggestions qui défilent -->
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-8 text-center text-green-800">Quelques Suggestions</h2>
 
-            <div id="auth-section" class="mb-4">
-                <p class="text-sm text-gray-600 mb-2">Veuillez vous authentifier pour continuer</p>
-                <input type="password" id="password" placeholder="Mot de passe" class="w-full p-2 border rounded">
-                <p id="auth-error" class="text-red-500 text-sm mt-1 hidden">Mot de passe incorrect</p>
-                <button onclick="checkAuth()" class="mt-2 bg-[#A1835B] text-white px-4 py-2 rounded">Valider</button>
-            </div>
+        <!-- Onglets des catégories -->
+        <div class="flex justify-center mb-6">
+            <button onclick="showCategory('student')" id="studentTab" class="px-4 py-2 mx-2 font-medium border-b-2 border-amber-500">Repas Étudiant</button>
+            <button onclick="showCategory('desserts')" id="dessertsTab" class="px-4 py-2 mx-2 font-medium text-gray-500">Desserts</button>
+            <button onclick="showCategory('drinks')" id="drinksTab" class="px-4 py-2 mx-2 font-medium text-gray-500">Boissons</button>
+        </div>
 
-            <form id="shoe-form" class="hidden overflow-y-auto flex-1 modal-content">
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2">Marque</label>
-                    <input type="text" id="brand" required class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2">Modèle</label>
-                    <input type="text" id="model" required class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2">Taille</label>
-                    <input type="number" id="size" step="0.5" min="20" max="50" required class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2">Photo de la chaussure</label>
-                    <input type="file" id="image" accept="image/*" class="w-full" onchange="previewImage(this, 'image-preview')">
-                    <img id="image-preview" class="image-preview">
-                    <small class="text-gray-500">Choisissez une image pour votre paire</small>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2">Logo de la marque</label>
-                    <input type="file" id="logo" accept="image/*" class="w-full" onchange="previewImage(this, 'logo-preview')">
-                    <img id="logo-preview" class="logo-preview">
-                    <small class="text-gray-500">Choisissez le logo de la marque</small>
-                </div>
-                <div class="modal-actions">
-                    <div class="flex justify-end space-x-2">
-                        <button type="button" onclick="closeModal()" class="px-4 py-2 border rounded">Annuler</button>
-                        <button type="submit" class="bg-[#A1835B] text-white px-4 py-2 rounded">Enregistrer</button>
+        <!-- Carrousel Repas Étudiant -->
+        <div id="studentRecipes" class="carousel-container">
+            <div class="carousel">
+                <!-- Recette 1 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c" alt="Pâtes Rapides" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Pâtes Rapides</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>5 min</span>
+                                <span>2 portions</span>
+                            </div>
+                            <button onclick="openRecipe('pates')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div id="delete-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg p-6 w-full max-w-md fade-in max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold">Confirmer la suppression</h3>
-                <button onclick="closeDeleteModal()" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="overflow-y-auto flex-1 modal-content">
-                <p class="mb-4">Êtes-vous sûr de vouloir supprimer cette paire ?</p>
-                <div id="delete-auth-section" class="mb-4">
-                    <p class="text-sm text-gray-600 mb-2">Veuillez vous authentifier pour continuer</p>
-                    <input type="password" id="delete-password" placeholder="Mot de passe" class="w-full p-2 border rounded">
-                    <p id="delete-auth-error" class="text-red-500 text-sm mt-1 hidden">Mot de passe incorrect</p>
+                <!-- Recette 2 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26" alt="Omelette" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Omelette Simple</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>10 min</span>
+                                <span>1 portion</span>
+                            </div>
+                            <button onclick="openRecipe('omelette')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recette 3 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1533022139390-e31c08d0f6eb" alt="Sandwich" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Sandwich Équilibré</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>7 min</span>
+                                <span>1 portion</span>
+                            </div>
+                            <button onclick="openRecipe('sandwich')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-actions">
-                <div class="flex justify-end space-x-2">
-                    <button onclick="closeDeleteModal()" class="px-4 py-2 border rounded">Annuler</button>
-                    <button onclick="confirmDelete()" class="bg-red-600 text-white px-4 py-2 rounded">Supprimer</button>
+            <div class="flex justify-center mt-4">
+                <button onclick="moveCarousel(-1, 'studentRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&lt;</button>
+                <button onclick="moveCarousel(1, 'studentRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&gt;</button>
+            </div>
+        </div>
+
+        <!-- Carrousel Desserts (caché par défaut) -->
+        <div id="dessertsRecipes" class="carousel-container hidden">
+            <div class="carousel">
+                <!-- Dessert 1 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713" alt="Mousse au chocolat" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Mousse au Chocolat</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>30 min</span>
+                                <span>4 portions</span>
+                            </div>
+                            <button onclick="openRecipe('mousse')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Dessert 2 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1563729786988-2e4e6a855942" alt="Cheesecake" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Cheesecake aux Fruits Rouges</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>4 h</span>
+                                <span>8 portions</span>
+                            </div>
+                            <button onclick="openRecipe('cheesecake')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dessert 3 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1626802593531-91e777e3dc61" alt="Panna Cotta" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Panna Cotta</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>1 h</span>
+                                <span>6 portions</span>
+                            </div>
+                            <button onclick="openRecipe('pannacotta')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-4">
+                <button onclick="moveCarousel(-1, 'dessertsRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&lt;</button>
+                <button onclick="moveCarousel(1, 'dessertsRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&gt;</button>
+            </div>
+        </div>
+
+        <!-- Carrousel Boissons (caché par défaut) -->
+        <div id="drinksRecipes" class="carousel-container hidden">
+            <div class="carousel">
+                <!-- Boisson 1 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b" alt="Mojito" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Mojito</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>5 min</span>
+                                <span>1 portion</span>
+                            </div>
+                            <button onclick="openRecipe('mojito')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boisson 2 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1514361892635-6b07e31e75f9" alt="Margarita" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Margarita</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>7 min</span>
+                                <span>1 portion</span>
+                            </div>
+                            <button onclick="openRecipe('margarita')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boisson 3 -->
+                <div class="carousel-item p-2">
+                    <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307" alt="Espresso Martini" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold mb-2">Espresso Martini</h3>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>6 min</span>
+                                <span>1 portion</span>
+                            </div>
+                            <button onclick="openRecipe('espressomartini')" class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                                Voir la recette
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-4">
+                <button onclick="moveCarousel(-1, 'drinksRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&lt;</button>
+                <button onclick="moveCarousel(1, 'drinksRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&gt;</button>
             </div>
         </div>
     </div>
-    <!-- Image Viewer Modal (version corrigée) -->
-    <div id="image-viewer-modal" class="modal fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
-        <div class="max-w-4xl max-h-full p-4 relative">
-            <button onclick="closeImageViewer()" class="absolute top-4 right-4 text-white hover:text-gray-300 text-2xl z-10 bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center">
-                <i class="fas fa-times"></i>
-            </button>
-            <img id="full-image" src="" alt="Image en plein écran" class="max-w-full max-h-[90vh] object-contain">
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6">
+        <div class="text-center">
+            <p class="text-gray-400 mb-2">&copy; 2025 Savoureux. Tous droits réservés.</p>
+            <p class="text-gray-400">
+                Créé par <span class="font-medium text-white">Romain</span> |
+                <a href="https://srn-romain.github.io/portfolio/" class="text-indigo-400 hover:text-indigo-300 transition-colors">Portfolio</a> |
+                <a href="https://www.linkedin.com/in/romain-sieurin/" class="text-indigo-400 hover:text-indigo-300 transition-colors">LinkedIn</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- Popup Recette -->
+<div id="recipePopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+            <h2 id="recipeTitle" class="text-xl font-bold"></h2>
+            <button onclick="closeRecipe()" class="text-2xl">&times;</button>
+        </div>
+
+        <div class="p-6">
+            <img id="recipeImage" src="" alt="" class="w-full h-64 object-cover rounded mb-6">
+
+            <div class="flex border-b mb-4">
+                <button id="ingredientsTab" class="px-4 py-2 font-medium border-b-2 border-amber-500">Ingrédients</button>
+                <button id="preparationTab" class="px-4 py-2 font-medium text-gray-500">Préparation</button>
+            </div>
+
+            <div id="ingredientsContent" class="mb-6">
+                <ul id="ingredientsList" class="list-disc pl-5 space-y-2">
+                    <!-- Contenu généré dynamiquement -->
+                </ul>
+            </div>
+
+            <div id="preparationContent" class="hidden">
+                <ol id="preparationSteps" class="list-decimal pl-5 space-y-3">
+                    <!-- Contenu généré dynamiquement -->
+                </ol>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Configuration Firebase
-    const firebaseConfig = {
-        apiKey: "AIzaSyCXTZOyazx9zUaMfJNECVkRY968g1moSnU",
-        authDomain: "macollectiondeshoes.firebaseapp.com",
-        projectId: "macollectiondeshoes",
-        storageBucket: "macollectiondeshoes.firebasestorage.app",
-        messagingSenderId: "921234137560",
-        appId: "1:921234137560:web:fc6a681c676429ed1892ad"
+    // Données des recettes
+    const recipes = {
+        'pates': {
+            title: "Pâtes Rapides",
+            image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+            ingredients: [
+                "200g de pâtes",
+                "2 cuillères à soupe d'huile d'olive",
+                "1 gousse d'ail",
+                "Parmesan râpé",
+                "Sel et poivre"
+            ],
+            preparation: [
+                "Faites bouillir de l'eau dans une casserole",
+                "Ajoutez les pâtes et laissez cuire 8-10 minutes",
+                "Égouttez les pâtes en gardant un peu d'eau de cuisson",
+                "Dans une poêle, faites chauffer l'huile avec l'ail",
+                "Ajoutez les pâtes et mélangez bien",
+                "Servez avec du parmesan et poivrez"
+            ]
+        },
+        'omelette': {
+            title: "Omelette Simple",
+            image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26",
+            ingredients: [
+                "3 œufs",
+                "2 cuillères à soupe de lait",
+                "1 noisette de beurre",
+                "Sel et poivre",
+                "Herbes fraîches (optionnel)"
+            ],
+            preparation: [
+                "Battez les œufs dans un bol avec le lait, le sel et le poivre",
+                "Faites fondre le beurre dans une poêle à feu moyen",
+                "Versez les œufs battus dans la poêle",
+                "Laissez cuire 2-3 minutes en soulevant les bords",
+                "Pliez l'omelette en deux et servez immédiatement"
+            ]
+        },
+        // Ajouter d'autres recettes ici
     };
 
-    // Initialiser Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const shoesCollection = db.collection('shoes');
+    // Fonction pour gérer le carrousel
+    let currentPosition = 0;
+    function moveCarousel(direction, containerId) {
+        const container = document.getElementById(containerId);
+        const carousel = container.querySelector('.carousel');
+        const items = carousel.querySelectorAll('.carousel-item');
+        const itemWidth = items[0].offsetWidth;
 
-    async function sha256(message) {
-        // Encoder le message en UTF-8
-        const msgBuffer = new TextEncoder().encode(message);
-        // Hacher le message avec SHA-256
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-        // Convertir le tableau d'octets en chaîne hexadécimale
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
+        currentPosition += direction;
+
+        // Limite les déplacements
+        if (currentPosition < 0) currentPosition = 0;
+        if (currentPosition > items.length - 1) currentPosition = items.length - 1;
+
+        carousel.style.transform = `translateX(-${currentPosition * itemWidth}px)`;
     }
 
-    // Password for authentication
-    const PASSWORD_HASH = '7cfae86dbdef5b6712ca464daaa4a65fb1c528cc45d4473360b8e9b344c0d67e';
+    // Fonction pour changer de catégorie
+    function showCategory(category) {
+        // Cache tous les carrousels
+        document.getElementById('studentRecipes').classList.add('hidden');
+        document.getElementById('dessertsRecipes').classList.add('hidden');
+        document.getElementById('drinksRecipes').classList.add('hidden');
 
-    // Store shoes data
-    let shoes = [];
-    let currentShoeId = null;
-    let brands = new Set();
+        // Réinitialise tous les onglets
+        document.getElementById('studentTab').classList.remove('border-amber-500');
+        document.getElementById('studentTab').classList.add('text-gray-500');
+        document.getElementById('dessertsTab').classList.remove('border-amber-500');
+        document.getElementById('dessertsTab').classList.add('text-gray-500');
+        document.getElementById('drinksTab').classList.remove('border-amber-500');
+        document.getElementById('drinksTab').classList.add('text-gray-500');
 
-    // DOM Elements
-    const shoesContainer = document.getElementById('shoes-container');
-    const totalShoesElement = document.getElementById('total-shoes');
-    const shoeModal = document.getElementById('shoe-modal');
-    const deleteModal = document.getElementById('delete-modal');
-    const authSection = document.getElementById('auth-section');
-    const shoeForm = document.getElementById('shoe-form');
-    const searchInput = document.getElementById('search');
+        // Affiche le carrousel sélectionné et active l'onglet
+        if (category === 'student') {
+            document.getElementById('studentRecipes').classList.remove('hidden');
+            document.getElementById('studentTab').classList.add('border-amber-500');
+            document.getElementById('studentTab').classList.remove('text-gray-500');
+        } else if (category === 'desserts') {
+            document.getElementById('dessertsRecipes').classList.remove('hidden');
+            document.getElementById('dessertsTab').classList.add('border-amber-500');
+            document.getElementById('dessertsTab').classList.remove('text-gray-500');
+        } else if (category === 'drinks') {
+            document.getElementById('drinksRecipes').classList.remove('hidden');
+            document.getElementById('drinksTab').classList.add('border-amber-500');
+            document.getElementById('drinksTab').classList.remove('text-gray-500');
+        }
 
-    function init() {
-        loadShoes();
-
-        // Event listeners
-        searchInput.addEventListener('input', () => {
-            renderShoes(searchInput.value.toLowerCase());
-        });
-
-        // Form submission
-        document.getElementById('shoe-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            saveShoe();
-        });
-
-        document.getElementById('password').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                checkAuth();
-            }
-        });
-
-        // Ajouter la validation par touche Entrée pour la confirmation de suppression
-        document.getElementById('delete-password').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                confirmDelete();
-            }
-        });
-
-        // Moderniser les champs de sélection de fichiers
-        // Pour l'image de la chaussure
-        document.getElementById('shoe-form').querySelector('div:nth-of-type(4)').innerHTML = `
-        <label class="block text-gray-700 mb-2">Photo de la chaussure</label>
-        <label for="image" class="custom-file-upload">
-            <i class="fas fa-upload"></i> Choisir une image
-        </label>
-        <input type="file" id="image" accept="image/*" class="file-input" onchange="previewImage(this, 'image-preview'); updateFileName(this, 'image-name')">
-        <p id="image-name" class="text-sm text-gray-500 mt-1">Aucun fichier sélectionné</p>
-        <img id="image-preview" class="image-preview">
-    `;
-
-        // Pour le logo de la marque
-        document.getElementById('shoe-form').querySelector('div:nth-of-type(5)').innerHTML = `
-        <label class="block text-gray-700 mb-2">Logo de la marque</label>
-        <label for="logo" class="custom-file-upload">
-            <i class="fas fa-upload"></i> Choisir un logo
-        </label>
-        <input type="file" id="logo" accept="image/*" class="file-input" onchange="previewImage(this, 'logo-preview'); updateFileName(this, 'logo-name')">
-        <p id="logo-name" class="text-sm text-gray-500 mt-1">Aucun fichier sélectionné</p>
-        <img id="logo-preview" class="logo-preview">
-    `;
-    }
-
-    // Charger les chaussures depuis Firebase
-    function loadShoes() {
-        shoesContainer.innerHTML = `
-            <div class="col-span-full text-center py-10">
-                <i class="fas fa-spinner fa-spin text-4xl text-gray-300 mb-2"></i>
-                <p class="text-gray-500">Chargement des chaussures...</p>
-            </div>
-        `;
-
-        shoesCollection.get()
-            .then((snapshot) => {
-                shoes = [];
-                snapshot.forEach((doc) => {
-                    shoes.push({
-                        id: doc.id,
-                        ...doc.data()
-                    });
-                });
-                renderShoes();
-                updateTotalShoes();
-                updateTotalBrands();
-                updateBrandFilters();
-            })
-            .catch((error) => {
-                console.error("Erreur lors du chargement des données:", error);
-                shoesContainer.innerHTML = `
-                    <div class="col-span-full text-center py-10">
-                        <i class="fas fa-exclamation-triangle text-4xl text-red-300 mb-2"></i>
-                        <p class="text-red-500">Erreur lors du chargement des données</p>
-                    </div>
-                `;
-            });
-    }
-
-    // Preview image before upload
-    function previewImage(input, previewId) {
-        const preview = document.getElementById(previewId);
-        const file = input.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-            }
-
-            reader.readAsDataURL(file);
-        } else {
-            preview.style.display = 'none';
+        // Réinitialise la position du carrousel
+        currentPosition = 0;
+        const currentCarousel = document.querySelector(`.carousel-container:not(.hidden) .carousel`);
+        if (currentCarousel) {
+            currentCarousel.style.transform = `translateX(0)`;
         }
     }
 
-    // Ajouter cette fonction dans la section script
-    function updateFileName(input, nameElementId) {
-        const nameElement = document.getElementById(nameElementId);
-        if (input.files && input.files[0]) {
-            nameElement.textContent = input.files[0].name;
-        } else {
-            nameElement.textContent = "Aucun fichier sélectionné";
-        }
-    }
+    function openRecipe(recipeId) {
+        const recipe = recipes[recipeId];
+        if (!recipe) return;
 
-    // Modification du rendu des cartes de chaussures
-    function renderShoes(searchTerm = '') {
-        shoesContainer.innerHTML = '';
+        document.getElementById('recipeTitle').textContent = recipe.title;
+        document.getElementById('recipeImage').src = recipe.image;
+        document.getElementById('recipeImage').alt = recipe.title;
 
-        // Filter and sort shoes
-        let filteredShoes = [...shoes];
+        const ingredientsList = document.getElementById('ingredientsList');
+        ingredientsList.innerHTML = recipe.ingredients.map(i => `<li>${i}</li>`).join('');
 
-        if (searchTerm) {
-            filteredShoes = filteredShoes.filter(shoe =>
-                shoe.brand.toLowerCase().includes(searchTerm) ||
-                shoe.model.toLowerCase().includes(searchTerm)
-            );
-        }
+        const preparationSteps = document.getElementById('preparationSteps');
+        preparationSteps.innerHTML = recipe.preparation.map(s => `<li>${s}</li>`).join('');
 
-        // Sort by model name
-        filteredShoes.sort((a, b) => a.model.localeCompare(b.model));
+        document.getElementById('recipePopup').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
 
-        if (filteredShoes.length === 0) {
-            shoesContainer.innerHTML = `
-            <div class="col-span-full text-center py-10">
-                <i class="fas fa-shoe-prints text-4xl text-gray-300 mb-2"></i>
-                <p class="text-gray-500">Aucune paire trouvée</p>
-            </div>
-        `;
-            return;
-        }
+        // Gestion des onglets
+        document.getElementById('ingredientsTab').addEventListener('click', () => {
+            document.getElementById('ingredientsContent').classList.remove('hidden');
+            document.getElementById('preparationContent').classList.add('hidden');
+            document.getElementById('ingredientsTab').classList.add('border-amber-500', 'text-black');
+            document.getElementById('ingredientsTab').classList.remove('text-gray-500');
+            document.getElementById('preparationTab').classList.remove('border-amber-500', 'text-black');
+            document.getElementById('preparationTab').classList.add('text-gray-500');
+        });
 
-        filteredShoes.forEach(shoe => {
-            const shoeCard = document.createElement('div');
-            shoeCard.className = 'shoe-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow relative';
-            shoeCard.innerHTML = `
-            <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openImageViewer('${shoe.image}', '${shoe.brand} ${shoe.model}')">
-               <img src="${shoe.image}" alt="${shoe.brand} ${shoe.model}" class="w-full h-full object-cover">
-            </div>
-            <div class="p-4">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="font-semibold text-lg text-gray-800">${shoe.model}</h3>
-                        <p class="text-gray-600">${shoe.brand}</p>
-                        <p class="text-gray-500">Taille: ${shoe.size}</p>
-                    </div>
-                    ${shoe.logo ? `<img src="${shoe.logo}" alt="Logo ${shoe.brand}" class="h-14 w-14 object-contain">` : ''}
-                </div>
-            </div>
-            <div class="card-actions absolute top-2 right-2 flex space-x-2">
-                <button onclick="editShoe('${shoe.id}')" class="bg-[#A1835B] text-white p-2.5 rounded-full hover:bg-[#A1835B]-600 transition-all shadow-md">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button onclick="openDeleteModal('${shoe.id}')" style="background-color: #A0522D" class="hover:bg-[#874326] text-white p-2.5 rounded-full transition-all shadow-md">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </div>
-        `;
-            shoesContainer.appendChild(shoeCard);
+        document.getElementById('preparationTab').addEventListener('click', () => {
+            document.getElementById('ingredientsContent').classList.add('hidden');
+            document.getElementById('preparationContent').classList.remove('hidden');
+            document.getElementById('preparationTab').classList.add('border-amber-500', 'text-black');
+            document.getElementById('preparationTab').classList.remove('text-gray-500');
+            document.getElementById('ingredientsTab').classList.remove('border-amber-500', 'text-black');
+            document.getElementById('ingredientsTab').classList.add('text-gray-500');
         });
     }
 
-    // Update total shoes count
-    function updateTotalShoes() {
-        totalShoesElement.textContent = `${shoes.length} ${shoes.length === 1 ? 'paire' : 'paires'}`;
+    function closeRecipe() {
+        document.getElementById('recipePopup').classList.add('hidden');
+        document.body.style.overflow = 'auto';
     }
-
-    // Update total brands count
-    function updateTotalBrands() {
-        const uniqueBrands = new Set(shoes.map(shoe => shoe.brand));
-        const brandsCount = uniqueBrands.size;
-        document.getElementById('total-brands').textContent = `${brandsCount} ${brandsCount === 1 ? 'marque' : 'marques'}`;
-    }
-
-    // Update brand filters
-    function updateBrandFilters() {
-        const filterContainer = document.querySelector('.flex.flex-wrap.gap-2');
-        // Clear existing filters (except "Toutes")
-        while (filterContainer.children.length > 1) {
-            filterContainer.removeChild(filterContainer.lastChild);
-        }
-
-        // Get unique brands
-        brands = new Set(shoes.map(shoe => shoe.brand));
-
-        // Add brand filters
-        brands.forEach(brand => {
-            const button = document.createElement('button');
-            button.className = 'filter-btn bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-full text-sm';
-            button.textContent = brand;
-            button.onclick = () => filterByBrand(brand);
-            filterContainer.appendChild(button);
-        });
-    }
-
-    // Filter shoes by brand
-    function filterByBrand(brand) {
-        // Update active filter button
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('bg-[#A1835B]', 'text-white');
-            btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
-        });
-
-        if (brand === 'all') {
-            // Cibler spécifiquement le premier bouton (Toutes)
-            document.querySelector('.filter-btn:first-child').classList.remove('bg-gray-200', 'hover:bg-gray-300');
-            document.querySelector('.filter-btn:first-child').classList.add('bg-[#A1835B]', 'text-white');
-            renderShoes();
-        } else {
-            const activeBtn = [...document.querySelectorAll('.filter-btn')].find(btn => btn.textContent === brand);
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-gray-200', 'hover:bg-gray-300');
-                activeBtn.classList.add('bg-[#A1835B]', 'text-white');
-            }
-
-            const filteredShoes = shoes.filter(shoe => shoe.brand === brand);
-            shoesContainer.innerHTML = '';
-
-            if (filteredShoes.length === 0) {
-                shoesContainer.innerHTML = `
-                    <div class="col-span-full text-center py-10">
-                        <i class="fas fa-shoe-prints text-4xl text-gray-300 mb-2"></i>
-                        <p class="text-gray-500">Aucune paire de ${brand} trouvée</p>
-                    </div>
-                `;
-                return;
-            }
-
-            // Sort and display filtered shoes
-            filteredShoes.sort((a, b) => a.model.localeCompare(b.model)).forEach(shoe => {
-                const shoeCard = document.createElement('div');
-                shoeCard.className = 'shoe-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow relative';
-                shoeCard.innerHTML = `
-        <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openImageViewer('${shoe.image}', '${shoe.brand} ${shoe.model}')">
-            <img src="${shoe.image}" alt="${shoe.brand} ${shoe.model}" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4">
-            <div class="flex justify-between items-start">
-                <div>
-                    <h3 class="font-semibold text-lg text-gray-800">${shoe.model}</h3>
-                    <p class="text-gray-600">${shoe.brand}</p>
-                    <p class="text-gray-500">Taille: ${shoe.size}</p>
-                </div>
-                ${shoe.logo ? `<img src="${shoe.logo}" alt="Logo ${shoe.brand}" class="h-14 w-14 object-contain">` : ''}
-            </div>
-        </div>
-        <div class="card-actions absolute top-2 right-2 flex space-x-2">
-            <button onclick="editShoe('${shoe.id}')" class="bg-[#A1835B] text-white p-2.5 rounded-full hover:bg-[#8A6E4A] transition-all shadow-md">
-                <i class="fas fa-pencil-alt"></i>
-            </button>
-            <button onclick="openDeleteModal('${shoe.id}')" style="background-color: #A0522D" class="hover:bg-[#874326] text-white p-2.5 rounded-full transition-all shadow-md">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        </div>
-    `;
-                shoesContainer.appendChild(shoeCard);
-            });
-        }
-    }
-
-    // Open add shoe modal
-    function openAddModal() {
-        document.getElementById('modal-title').textContent = 'Ajouter une paire';
-        currentShoeId = null;
-        authSection.classList.remove('hidden');
-        shoeForm.classList.add('hidden');
-        document.getElementById('password').value = '';
-        document.getElementById('auth-error').classList.add('hidden');
-        document.getElementById('shoe-form').reset();
-        document.getElementById('image-preview').style.display = 'none';
-        document.getElementById('logo-preview').style.display = 'none';
-        shoeModal.classList.remove('hidden');
-    }
-
-    // Open edit shoe modal
-    function editShoe(id) {
-        const shoe = shoes.find(s => s.id === id);
-        if (!shoe) return;
-
-        document.getElementById('modal-title').textContent = 'Modifier la paire';
-        currentShoeId = id;
-        authSection.classList.remove('hidden');
-        shoeForm.classList.add('hidden');
-        document.getElementById('password').value = '';
-        document.getElementById('auth-error').classList.add('hidden');
-
-        // Reset previews
-        document.getElementById('image-preview').style.display = 'none';
-        document.getElementById('logo-preview').style.display = 'none';
-
-        shoeModal.classList.remove('hidden');
-    }
-
-    // Close modal
-    function closeModal() {
-        shoeModal.classList.add('hidden');
-        document.getElementById('shoe-form').reset();
-        document.getElementById('image-preview').style.display = 'none';
-        document.getElementById('logo-preview').style.display = 'none';
-    }
-
-    // Check authentication
-    async function checkAuth() {
-        const passwordInput = document.getElementById('password').value;
-        const inputHash = await sha256(passwordInput);
-
-        if (inputHash === PASSWORD_HASH) {
-            authSection.classList.add('hidden');
-            shoeForm.classList.remove('hidden');
-
-            // If editing, populate form with shoe data
-            if (currentShoeId) {
-                const shoe = shoes.find(s => s.id === currentShoeId);
-                if (shoe) {
-                    document.getElementById('brand').value = shoe.brand;
-                    document.getElementById('model').value = shoe.model;
-                    document.getElementById('size').value = shoe.size;
-
-                    // Show existing images if available
-                    if (shoe.image) {
-                        document.getElementById('image-preview').src = shoe.image;
-                        document.getElementById('image-preview').style.display = 'block';
-                    }
-                    if (shoe.logo) {
-                        document.getElementById('logo-preview').src = shoe.logo;
-                        document.getElementById('logo-preview').style.display = 'block';
-                    }
-                }
-            }
-        } else {
-            document.getElementById('auth-error').classList.remove('hidden');
-        }
-    }
-
-    function compressImage(imageDataUrl, maxSizeKB = 990) {
-        return new Promise((resolve) => {
-            // Vérifier si l'image est déjà assez petite
-            if (imageDataUrl.length <= maxSizeKB * 1024) {
-                return resolve(imageDataUrl); // Retourner l'image d'origine si elle est déjà assez petite
-            }
-
-            const img = new Image();
-            img.src = imageDataUrl;
-
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                // Conserver les dimensions d'origine
-                const width = img.width;
-                const height = img.height;
-
-                canvas.width = width;
-                canvas.height = height;
-
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, width, height);
-
-                // Commencer avec une qualité élevée
-                let quality = 0.9;
-                let result = canvas.toDataURL('image/jpeg', quality);
-
-                // Réduire la qualité jusqu'à ce que l'image soit assez petite
-                while (result.length > maxSizeKB * 1024 && quality > 0.1) {
-                    quality -= 0.1;
-                    result = canvas.toDataURL('image/jpeg', quality);
-                }
-
-                resolve(result);
-            };
-        });
-    }
-
-    // Modifier la fonction saveShoe pour utiliser la compression
-    function saveShoe() {
-        const brand = document.getElementById('brand').value.trim();
-        const model = document.getElementById('model').value.trim();
-        const size = parseFloat(document.getElementById('size').value);
-        const imageInput = document.getElementById('image');
-        const logoInput = document.getElementById('logo');
-
-        // Validate inputs
-        if (!brand || !model || isNaN(size) || size < 20 || size > 50) {
-            alert('Veuillez remplir tous les champs correctement');
-            return;
-        }
-
-        // Afficher un indicateur de chargement
-        const submitBtn = document.querySelector('#shoe-form button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Enregistrement...';
-        submitBtn.disabled = true;
-
-        // Handle image uploads
-        let imageUrl = 'https://via.placeholder.com/300x200?text=Chaussure';
-        let logoUrl = 'https://via.placeholder.com/100x30?text=Logo';
-
-        // Fonction qui finalise la sauvegarde après traitement des images
-        const finalizeSave = async (shoeImage, shoeLogo) => {
-            try {
-                // Compresser les images
-                if (shoeImage !== 'https://via.placeholder.com/300x200?text=Chaussure') {
-                    shoeImage = await compressImage(shoeImage, 900); // 900KB max pour l'image
-                }
-
-                if (shoeLogo !== 'https://via.placeholder.com/100x30?text=Logo') {
-                    shoeLogo = await compressImage(shoeLogo, 100); // 100KB max pour le logo
-                }
-
-                // Créer l'objet chaussure
-                const shoeData = {
-                    brand,
-                    model,
-                    size,
-                    image: shoeImage,
-                    logo: shoeLogo,
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                let savePromise;
-
-                if (currentShoeId) {
-                    savePromise = shoesCollection.doc(currentShoeId).update(shoeData);
-                } else {
-                    shoeData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-                    savePromise = shoesCollection.add(shoeData);
-                }
-
-                await savePromise;
-                closeModal();
-                loadShoes();
-            } catch (error) {
-                console.error("Erreur lors de l'enregistrement:", error);
-                alert("Une erreur est survenue lors de l'enregistrement. Veuillez réessayer.");
-            } finally {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
-        };
-
-        // Traitement des images
-        const processImages = async () => {
-            // Si on est en mode édition et pas de nouvel upload
-            if (currentShoeId) {
-                const existingShoe = shoes.find(s => s.id === currentShoeId);
-                if (existingShoe) {
-                    if (!imageInput.files || !imageInput.files[0]) {
-                        imageUrl = existingShoe.image;
-                    }
-                    if (!logoInput.files || !logoInput.files[0]) {
-                        logoUrl = existingShoe.logo;
-                    }
-                }
-            }
-
-            // Traitement de l'image principale
-            if (imageInput.files && imageInput.files[0]) {
-                imageUrl = await readFileAsDataURL(imageInput.files[0]);
-            }
-
-            // Traitement du logo
-            if (logoInput.files && logoInput.files[0]) {
-                logoUrl = await readFileAsDataURL(logoInput.files[0]);
-            }
-
-            // Finaliser la sauvegarde
-            await finalizeSave(imageUrl, logoUrl);
-        };
-
-        // Lire un fichier comme DataURL
-        const readFileAsDataURL = (file) => {
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = (e) => resolve(e.target.result);
-                reader.readAsDataURL(file);
-            });
-        };
-
-        // Lancer le processus
-        processImages();
-    }
-
-    function completeSave(brand, model, size, imageUrl, logoUrl) {
-        // Création de l'objet chaussure
-        const shoeData = {
-            brand,
-            model,
-            size,
-            image: imageUrl,
-            logo: logoUrl,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
-
-        // Afficher un indicateur de chargement
-        const submitBtn = document.querySelector('#shoe-form button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Enregistrement...';
-        submitBtn.disabled = true;
-
-        let savePromise;
-
-        if (currentShoeId) {
-            // Mise à jour d'une chaussure existante
-            savePromise = shoesCollection.doc(currentShoeId).update(shoeData);
-        } else {
-            // Ajout d'une nouvelle chaussure
-            shoeData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-            savePromise = shoesCollection.add(shoeData);
-        }
-
-        savePromise
-            .then(() => {
-                // Fermer le modal et recharger les données
-                closeModal();
-                loadShoes();
-            })
-            .catch((error) => {
-                console.error("Erreur lors de l'enregistrement:", error);
-                alert("Une erreur est survenue lors de l'enregistrement. Veuillez réessayer.");
-            })
-            .finally(() => {
-                // Restaurer le bouton
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
-    }
-
-    // Open delete confirmation modal
-    function openDeleteModal(id) {
-        currentShoeId = id;
-        document.getElementById('delete-password').value = '';
-        document.getElementById('delete-auth-error').classList.add('hidden');
-        deleteModal.classList.remove('hidden');
-    }
-
-    // Close delete modal
-    function closeDeleteModal() {
-        deleteModal.classList.add('hidden');
-    }
-
-    // Confirm delete after authentication
-    async function confirmDelete() {
-        const passwordInput = document.getElementById('delete-password').value;
-        const inputHash = await sha256(passwordInput);
-
-        if (inputHash === PASSWORD_HASH) {
-            // Afficher un indicateur de chargement
-            const deleteBtn = document.querySelector('#delete-modal .bg-red-600');
-            const originalText = deleteBtn.innerHTML;
-            deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Suppression...';
-            deleteBtn.disabled = true;
-
-            // Supprimer de Firebase
-            shoesCollection.doc(currentShoeId).delete()
-                .then(() => {
-                    // Fermer le modal et recharger les données
-                    closeDeleteModal();
-                    loadShoes();
-                })
-                .catch((error) => {
-                    console.error("Erreur lors de la suppression:", error);
-                    alert("Une erreur est survenue lors de la suppression. Veuillez réessayer.");
-                })
-                .finally(() => {
-                    // Restaurer le bouton
-                    deleteBtn.innerHTML = originalText;
-                    deleteBtn.disabled = false;
-                });
-        } else {
-            document.getElementById('delete-auth-error').classList.remove('hidden');
-        }
-    }
-
-    // Ouvrir le visualiseur d'image
-    function openImageViewer(imageSrc, altText) {
-        const fullImage = document.getElementById('full-image');
-        fullImage.src = imageSrc;
-        fullImage.alt = altText;
-
-        const modal = document.getElementById('image-viewer-modal');
-        modal.classList.remove('hidden');
-
-        // Ajouter un délai court avant d'ajouter la classe show pour l'animation
-        setTimeout(() => {
-            modal.classList.add('show');
-        }, 50);
-
-        // Ajouter un écouteur d'événement pour le clic sur le modal
-        modal.addEventListener('click', handleModalClick);
-    }
-
-    // Ajouter cette nouvelle fonction pour gérer le clic
-    function handleModalClick(event) {
-        // Si le clic est sur le modal lui-même (pas sur l'image ou sur des éléments enfants de l'image)
-        if (event.target === document.getElementById('image-viewer-modal')) {
-            closeImageViewer();
-        }
-    }
-
-    function closeImageViewer() {
-        const modal = document.getElementById('image-viewer-modal');
-        modal.classList.remove('show');
-
-        // Supprimer l'écouteur d'événement pour éviter les fuites de mémoire
-        modal.removeEventListener('click', handleModalClick);
-
-        // Ajouter un délai pour que l'animation se termine avant de cacher l'élément
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 300);
-    }
-
-    // Initialize the app when DOM is loaded
-    document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>

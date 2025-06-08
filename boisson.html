@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boissons - Savoureux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="favicon.png" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f5f0;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .recipe-card {
+            transition: all 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center">
+        <div class="text-2xl font-bold text-green-800 mb-2 md:mb-0 md:mr-8">Savoureux</div>
+        <div class="flex space-x-4">
+            <a href="index.html" class="px-3 py-2">Accueil</a>
+            <a href="plat.html" class="px-3 py-2">Repas Étudiant</a>
+            <a href="dessert.html" class="px-3 py-2">Desserts</a>
+            <a href="boisson.html" class="px-3 py-2 rounded-md bg-amber-500 text-white">Boissons</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="py-12 bg-blue-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl font-bold mb-4">Boissons Rafraîchissantes</h1>
+        <p class="text-xl max-w-2xl mx-auto">Des recettes simples pour se désaltérer avec style, de l'apéritif au digestif.</p>
+    </div>
+</section>
+
+<!-- Recettes -->
+<section class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Recette 1 - Mojito -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b" alt="Mojito" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-blue-600">Mojito</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 5 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 1 portion</span>
+                        <span><i class="fas fa-star mr-1"></i> Classique</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Le cocktail rafraîchissant à la menthe et au citron vert, parfait pour les soirées d'été.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>6 feuilles de menthe fraîche</li>
+                            <li>1 citron vert</li>
+                            <li>2 c. à café de sucre de canne</li>
+                            <li>5 cl de rhum blanc</li>
+                            <li>Eau gazeuse</li>
+                            <li>Glaçons</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Couper le citron vert en quartiers.</li>
+                            <li>Dans un verre, piler les feuilles de menthe avec le sucre et les quartiers de citron.</li>
+                            <li>Ajouter les glaçons et verser le rhum.</li>
+                            <li>Compléter avec de l'eau gazeuse.</li>
+                            <li>Mélanger délicatement et décorer d'une feuille de menthe.</li>
+                            <li>Servir immédiatement avec une paille.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 2 - Smoothie Énergétique -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1502741224143-90386d7f8c82" alt="Smoothie Énergétique" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-blue-600">Smoothie Énergétique</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 5 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 2 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Sain</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Un smoothie vitaminé idéal pour le petit-déjeuner ou après une séance de sport.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>1 banane</li>
+                            <li>150g de fruits rouges (fraises, framboises, myrtilles)</li>
+                            <li>1 yaourt nature</li>
+                            <li>15cl de lait d'amande</li>
+                            <li>1 c. à soupe de miel ou sirop d'érable</li>
+                            <li>1 c. à café de graines de chia (optionnel)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Couper la banane en rondelles.</li>
+                            <li>Placer tous les ingrédients dans un blender.</li>
+                            <li>Mixer jusqu'à obtenir une texture lisse et homogène.</li>
+                            <li>Verser dans des verres.</li>
+                            <li>Saupoudrer de graines de chia si désiré.</li>
+                            <li>Servir immédiatement ou conserver au frais.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 3 - Café Glacé -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735" alt="Café Glacé" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-blue-600">Café Glacé</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 10 min + 2h</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 2 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Rafraîchissant</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Une version rafraîchissante du café, parfaite pour les journées chaudes.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>200ml de café fort (espresso ou filtre)</li>
+                            <li>2 c. à soupe de sucre ou sirop de sucre</li>
+                            <li>150ml de lait</li>
+                            <li>Glaçons</li>
+                            <li>1 boule de glace à la vanille (optionnel)</li>
+                            <li>Crème fouettée et poudre de cacao pour servir</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Préparer le café et y dissoudre le sucre pendant qu'il est chaud.</li>
+                            <li>Laisser refroidir puis réfrigérer pendant au moins 2 heures.</li>
+                            <li>Remplir un grand verre de glaçons.</li>
+                            <li>Verser le café froid et ajouter le lait.</li>
+                            <li>Ajouter une boule de glace à la vanille si désiré.</li>
+                            <li>Décorer de crème fouettée et saupoudrer de cacao.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 4 - Margarita -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1514361892635-6b07e31e75f9" alt="Margarita" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-blue-600">Margarita</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 5 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 1 portion</span>
+                        <span><i class="fas fa-star mr-1"></i> Festif</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Un cocktail mexicain classique, équilibré entre l'acidité du citron et la douceur de l'orange.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>5 cl de tequila</li>
+                            <li>3 cl de triple sec ou Cointreau</li>
+                            <li>2 cl de jus de citron vert frais</li>
+                            <li>Sel fin</li>
+                            <li>Glaçons</li>
+                            <li>1 tranche de citron vert pour la décoration</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Frotter le bord d'un verre avec un quartier de citron vert.</li>
+                            <li>Tremper le bord du verre dans le sel pour former un cercle salé.</li>
+                            <li>Dans un shaker, mélanger la tequila, le triple sec et le jus de citron vert.</li>
+                            <li>Ajouter les glaçons et secouer vigoureusement.</li>
+                            <li>Filtrer et verser dans le verre préparé.</li>
+                            <li>Décorer d'une tranche de citron vert.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 5 - Limonade Maison -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1568100119359-dd8eec0b1ca3" alt="Limonade Maison" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-blue-600">Limonade Maison</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 15 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 6 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Économique</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Une boisson fraîche et acidulée, plus savoureuse que les versions industrielles.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>4 citrons jaunes bio</li>
+                            <li>100g de sucre</li>
+                            <li>1 litre d'eau</li>
+                            <li>1 citron vert pour la décoration</li>
+                            <li>Quelques feuilles de menthe fraîche</li>
+                            <li>Glaçons</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Laver les citrons et râper finement le zeste d'un citron.</li>
+                            <li>Presser le jus des 4 citrons.</li>
+                            <li>Dans une casserole, chauffer 250ml d'eau avec le sucre et le zeste de citron jusqu'à dissolution complète.</li>
+                            <li>Laisser refroidir le sirop puis le filtrer.</li>
+                            <li>Dans un pichet, mélanger le sirop, le jus de citron et le reste d'eau.</li>
+                            <li>Réfrigérer jusqu'au moment de servir.</li>
+                            <li>Servir avec des glaçons, des tranches de citron vert et de la menthe.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 6 - Chocolat Chaud Gourmand -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed" alt="Chocolat Chaud Gourmand" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-blue-600">Chocolat Chaud Gourmand</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 10 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 2 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Réconfortant</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Un chocolat chaud épais et onctueux, idéal pour les soirées d'hiver ou les moments cocooning.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>500ml de lait entier</li>
+                            <li>100g de chocolat noir (70% cacao)</li>
+                            <li>2 c. à soupe de sucre</li>
+                            <li>1 pincée de cannelle</li>
+                            <li>1 gousse de vanille ou 1 c. à café d'extrait de vanille</li>
+                            <li>Crème fouettée et copeaux de chocolat pour servir</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Hacher finement le chocolat.</li>
+                            <li>Dans une casserole, chauffer le lait à feu doux.</li>
+                            <li>Ajouter la gousse de vanille fendue (ou l'extrait) et la cannelle.</li>
+                            <li>Quand le lait commence à frémir, retirer la gousse de vanille.</li>
+                            <li>Ajouter le chocolat haché et remuer jusqu'à ce qu'il soit complètement fondu.</li>
+                            <li>Ajouter le sucre et fouetter vigoureusement pour obtenir une texture mousseuse.</li>
+                            <li>Verser dans des tasses chaudes.</li>
+                            <li>Décorer de crème fouettée et de copeaux de chocolat.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6">
+        <div class="text-center">
+            <p class="text-gray-400 mb-2">&copy; 2025 Savoureux. Tous droits réservés.</p>
+            <p class="text-gray-400">
+                Créé par <span class="font-medium text-white">Romain</span> |
+                <a href="https://srn-romain.github.io/portfolio/" class="text-indigo-400 hover:text-indigo-300 transition-colors">Portfolio</a> |
+                <a href="https://www.linkedin.com/in/romain-sieurin/" class="text-indigo-400 hover:text-indigo-300 transition-colors">LinkedIn</a>
+            </p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

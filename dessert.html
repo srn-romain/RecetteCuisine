@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desserts - Savoureux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="favicon.png" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f5f0;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .recipe-card {
+            transition: all 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center">
+        <div class="text-2xl font-bold text-green-800 mb-2 md:mb-0 md:mr-8">Savoureux</div>
+        <div class="flex space-x-4">
+            <a href="index.html" class="px-3 py-2">Accueil</a>
+            <a href="plat.html" class="px-3 py-2">Repas Étudiant</a>
+            <a href="dessert.html" class="px-3 py-2 rounded-md bg-amber-500 text-white">Desserts</a>
+            <a href="boisson.html" class="px-3 py-2">Boissons</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="py-12 bg-pink-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl font-bold mb-4">Desserts Gourmands</h1>
+        <p class="text-xl max-w-2xl mx-auto">Des douceurs simples à réaliser pour satisfaire toutes vos envies sucrées.</p>
+    </div>
+</section>
+
+<!-- Recettes -->
+<section class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Recette 1 - Bavarois à la Fraise -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1488477304112-4944851de03d" alt="Bavarois à la Fraise" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-pink-600">Bavarois à la Fraise</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 30 min + 4h</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 8 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Festif</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Un dessert élégant et frais aux saveurs de fraises, parfait pour impressionner vos convives.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>400g de fraises fraîches</li>
+                            <li>200g de biscuits type spéculoos</li>
+                            <li>80g de beurre fondu</li>
+                            <li>3 feuilles de gélatine</li>
+                            <li>250ml de crème fraîche liquide très froide</li>
+                            <li>80g de sucre</li>
+                            <li>2 blancs d'œufs</li>
+                            <li>1 c. à soupe de jus de citron</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Faire ramollir les feuilles de gélatine dans de l'eau froide.</li>
+                            <li>Mixer les biscuits finement et mélanger avec le beurre fondu.</li>
+                            <li>Tasser ce mélange au fond d'un moule à charnière et réserver au frais.</li>
+                            <li>Mixer 300g de fraises avec 40g de sucre et le jus de citron.</li>
+                            <li>Faire chauffer légèrement 3 c. à soupe de cette purée et y dissoudre la gélatine essorée.</li>
+                            <li>Mélanger avec le reste de purée et laisser refroidir.</li>
+                            <li>Monter la crème en chantilly ferme.</li>
+                            <li>Monter les blancs en neige avec le reste du sucre.</li>
+                            <li>Incorporer délicatement les blancs puis la chantilly à la purée de fraises.</li>
+                            <li>Verser sur la base de biscuits et réfrigérer au moins 4 heures.</li>
+                            <li>Décorer avec les fraises restantes avant de servir.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 2 - Mousse au Chocolat -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713" alt="Mousse au Chocolat" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-pink-600">Mousse au Chocolat</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 20 min + 3h</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 6 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Classique</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">La mousse au chocolat classique, aérienne et irrésistible, un dessert réconfortant et toujours apprécié.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>200g de chocolat noir à pâtisser</li>
+                            <li>6 œufs</li>
+                            <li>1 pincée de sel</li>
+                            <li>30g de sucre</li>
+                            <li>Quelques copeaux de chocolat pour la décoration</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Faire fondre le chocolat au bain-marie.</li>
+                            <li>Séparer les blancs des jaunes d'œufs.</li>
+                            <li>Ajouter les jaunes d'œufs au chocolat fondu et bien mélanger.</li>
+                            <li>Monter les blancs en neige ferme avec une pincée de sel.</li>
+                            <li>Ajouter le sucre aux blancs et continuer à battre quelques instants.</li>
+                            <li>Incorporer délicatement les blancs au mélange chocolaté en soulevant la masse.</li>
+                            <li>Répartir dans des verrines ou un grand saladier.</li>
+                            <li>Réfrigérer au moins 3 heures avant de servir.</li>
+                            <li>Décorer de copeaux de chocolat avant de déguster.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 3 - Tarte aux Pommes Simplifiée -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1508737804141-4c3b688e2546" alt="Tarte aux Pommes Simplifiée" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-pink-600">Tarte aux Pommes Simplifiée</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 15 min + 30 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 6 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Économique</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Une tarte aux pommes facile à réaliser avec une pâte toute prête et peu d'ingrédients, parfaite pour les débutants.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>1 pâte brisée ou feuilletée prête à dérouler</li>
+                            <li>4-5 pommes (Golden ou Reinette)</li>
+                            <li>3 c. à soupe de sucre</li>
+                            <li>1 c. à café de cannelle (optionnel)</li>
+                            <li>20g de beurre</li>
+                            <li>1 c. à soupe de sucre vanillé</li>
+                            <li>1 jaune d'œuf pour dorer (optionnel)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Préchauffer le four à 180°C.</li>
+                            <li>Étaler la pâte dans un moule à tarte et piquer le fond avec une fourchette.</li>
+                            <li>Éplucher et couper les pommes en fines tranches.</li>
+                            <li>Disposer les tranches de pommes sur la pâte en formant une spirale.</li>
+                            <li>Mélanger le sucre et la cannelle et saupoudrer sur les pommes.</li>
+                            <li>Répartir de petits morceaux de beurre sur le dessus.</li>
+                            <li>Si désiré, badigeonner les bords de la pâte avec le jaune d'œuf.</li>
+                            <li>Enfourner pendant 30 minutes jusqu'à ce que les pommes soient tendres et la pâte dorée.</li>
+                            <li>Saupoudrer de sucre vanillé à la sortie du four.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 4 - Crème Caramel Maison -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1620980776848-84ac10194945" alt="Crème Caramel Maison" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-pink-600">Crème Caramel Maison</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 20 min + 45 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 4 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Réconfortant</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Un dessert onctueux et fondant avec son caramel qui coule, un classique de la cuisine française accessible à tous.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>500ml de lait entier</li>
+                            <li>4 œufs</li>
+                            <li>100g de sucre (pour la crème)</li>
+                            <li>80g de sucre (pour le caramel)</li>
+                            <li>1 gousse de vanille ou 1 sachet de sucre vanillé</li>
+                            <li>1 c. à soupe d'eau</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Préchauffer le four à 160°C.</li>
+                            <li>Pour le caramel : faire chauffer 80g de sucre avec l'eau dans une casserole sans remuer jusqu'à obtenir une couleur ambrée.</li>
+                            <li>Verser rapidement le caramel dans le fond de 4 ramequins.</li>
+                            <li>Pour la crème : faire chauffer le lait avec la vanille jusqu'à frémissement.</li>
+                            <li>Fouetter les œufs avec 100g de sucre dans un saladier.</li>
+                            <li>Verser le lait chaud sur le mélange œufs-sucre en fouettant.</li>
+                            <li>Filtrer l'appareil et le répartir dans les ramequins sur le caramel.</li>
+                            <li>Placer les ramequins dans un bain-marie et enfourner pour 45 minutes.</li>
+                            <li>Laisser refroidir puis réfrigérer au moins 4 heures.</li>
+                            <li>Pour servir, passer un couteau autour de la crème et retourner sur une assiette.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 5 - Tiramisu Express -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9" alt="Tiramisu Express" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-pink-600">Tiramisu Express</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 15 min + 4h</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 4 portions</span>
+                        <span><i class="fas fa-star mr-1"></i> Sans cuisson</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Une version simplifiée et rapide du célèbre dessert italien, sans œuf cru pour plus de sécurité.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>250g de mascarpone</li>
+                            <li>200ml de crème liquide entière très froide</li>
+                            <li>50g de sucre glace</li>
+                            <li>12-16 biscuits à la cuillère</li>
+                            <li>150ml de café fort refroidi</li>
+                            <li>2 c. à soupe de liqueur (amaretto ou rhum, optionnel)</li>
+                            <li>Cacao en poudre non sucré</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Dans un bol, mélanger le café refroidi avec la liqueur.</li>
+                            <li>Fouetter la crème liquide en chantilly ferme.</li>
+                            <li>Dans un autre bol, fouetter le mascarpone avec le sucre glace.</li>
+                            <li>Incorporer délicatement la chantilly au mascarpone sucré.</li>
+                            <li>Tremper rapidement les biscuits dans le café (sans les détremper) et en disposer une couche au fond des verrines.</li>
+                            <li>Recouvrir d'une couche de crème au mascarpone.</li>
+                            <li>Répéter l'opération en terminant par une couche de crème.</li>
+                            <li>Réfrigérer au moins 4 heures.</li>
+                            <li>Saupoudrer généreusement de cacao juste avant de servir.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recette 6 - Cookies Moelleux -->
+            <div class="recipe-card bg-white rounded-lg overflow-hidden shadow-md">
+                <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e" alt="Cookies Moelleux" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold mb-2 text-pink-600">Cookies Moelleux</h2>
+                    <div class="flex justify-between text-sm text-gray-600 mb-4">
+                        <span><i class="far fa-clock mr-1"></i> 15 min + 10 min</span>
+                        <span><i class="fas fa-utensils mr-1"></i> 12 cookies</span>
+                        <span><i class="fas fa-star mr-1"></i> Facile</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">Des cookies américains au cœur moelleux et aux bords croustillants, avec des pépites de chocolat fondantes.</p>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Ingrédients :</h3>
+                        <ul class="list-disc pl-5 text-gray-600">
+                            <li>125g de beurre mou</li>
+                            <li>135g de sucre brun</li>
+                            <li>1 œuf</li>
+                            <li>1 c. à café d'extrait de vanille</li>
+                            <li>225g de farine</li>
+                            <li>1/2 c. à café de levure chimique</li>
+                            <li>1 pincée de sel</li>
+                            <li>150g de pépites de chocolat</li>
+                            <li>50g de noix (optionnel)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Préparation :</h3>
+                        <ol class="list-decimal pl-5 text-gray-600">
+                            <li>Préchauffer le four à 180°C.</li>
+                            <li>Mélanger le beurre mou avec le sucre jusqu'à obtention d'une texture crémeuse.</li>
+                            <li>Ajouter l'œuf et l'extrait de vanille, bien mélanger.</li>
+                            <li>Incorporer la farine, la levure et le sel tamisés.</li>
+                            <li>Ajouter les pépites de chocolat et les noix si désirées.</li>
+                            <li>Former des boules de pâte et les disposer sur une plaque de cuisson en les espaçant.</li>
+                            <li>Aplatir légèrement les boules.</li>
+                            <li>Enfourner pour 10-12 minutes jusqu'à ce que les bords soient dorés.</li>
+                            <li>Laisser refroidir quelques minutes sur la plaque puis transférer sur une grille.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6">
+        <div class="text-center">
+            <p class="text-gray-400 mb-2">&copy; 2025 Savoureux. Tous droits réservés.</p>
+            <p class="text-gray-400">
+                Créé par <span class="font-medium text-white">Romain</span> |
+                <a href="https://srn-romain.github.io/portfolio/" class="text-indigo-400 hover:text-indigo-300 transition-colors">Portfolio</a> |
+                <a href="https://www.linkedin.com/in/romain-sieurin/" class="text-indigo-400 hover:text-indigo-300 transition-colors">LinkedIn</a>
+            </p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
