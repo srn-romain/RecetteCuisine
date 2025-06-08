@@ -131,7 +131,7 @@
 
             <!-- Recette 3 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                <img src="https://images.unsplash.com/photo-1533022139390-e31c08d0f6eb" alt="Sandwich"
+                <img src="sandwich.jpg" alt="Sandwich"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="font-bold mb-2">Sandwich Équilibré</h3>
@@ -142,146 +142,6 @@
                     <button onclick="openRecipe('sandwich')"
                             class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
                         Voir la recette
-                    </button>
-                </div>
-            </div>
-
-            <!-- Carrousel Desserts (caché par défaut) -->
-            <div id="dessertsRecipes" class="carousel-container hidden">
-                <div class="carousel">
-                    <!-- Dessert 1 -->
-                    <div class="carousel-item p-2">
-                        <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                            <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713"
-                                 alt="Mousse au chocolat" class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="font-bold mb-2">Mousse au Chocolat</h3>
-                                <div class="flex justify-between text-sm text-gray-600 mb-3">
-                                    <span>30 min</span>
-                                    <span>4 portions</span>
-                                </div>
-                                <button onclick="openRecipe('mousse')"
-                                        class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
-                                    Voir la recette
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dessert 2 -->
-                    <div class="carousel-item p-2">
-                        <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                            <img src="https://images.unsplash.com/photo-1563729786988-2e4e6a855942" alt="Cheesecake"
-                                 class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="font-bold mb-2">Cheesecake aux Fruits Rouges</h3>
-                                <div class="flex justify-between text-sm text-gray-600 mb-3">
-                                    <span>4 h</span>
-                                    <span>8 portions</span>
-                                </div>
-                                <button onclick="openRecipe('cheesecake')"
-                                        class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
-                                    Voir la recette
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dessert 3 -->
-                    <div class="carousel-item p-2">
-                        <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                            <img src="https://images.unsplash.com/photo-1626802593531-91e777e3dc61" alt="Panna Cotta"
-                                 class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="font-bold mb-2">Panna Cotta</h3>
-                                <div class="flex justify-between text-sm text-gray-600 mb-3">
-                                    <span>1 h</span>
-                                    <span>6 portions</span>
-                                </div>
-                                <button onclick="openRecipe('pannacotta')"
-                                        class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
-                                    Voir la recette
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-center mt-4">
-                    <button onclick="moveCarousel(-1, 'dessertsRecipes')"
-                            class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&lt;
-                    </button>
-                    <button onclick="moveCarousel(1, 'dessertsRecipes')"
-                            class="mx-2 px-4 py-2 bg-gray-200 rounded-full">&gt;
-                    </button>
-                </div>
-            </div>
-
-            <!-- Carrousel Boissons (caché par défaut) -->
-            <div id="drinksRecipes" class="carousel-container hidden">
-                <div class="carousel">
-                    <!-- Boisson 1 -->
-                    <div class="carousel-item p-2">
-                        <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b" alt="Mojito"
-                                 class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="font-bold mb-2">Mojito</h3>
-                                <div class="flex justify-between text-sm text-gray-600 mb-3">
-                                    <span>5 min</span>
-                                    <span>1 portion</span>
-                                </div>
-                                <button onclick="openRecipe('mojito')"
-                                        class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
-                                    Voir la recette
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Boisson 2 -->
-                    <div class="carousel-item p-2">
-                        <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                            <img src="https://images.unsplash.com/photo-1514361892635-6b07e31e75f9" alt="Margarita"
-                                 class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="font-bold mb-2">Margarita</h3>
-                                <div class="flex justify-between text-sm text-gray-600 mb-3">
-                                    <span>7 min</span>
-                                    <span>1 portion</span>
-                                </div>
-                                <button onclick="openRecipe('margarita')"
-                                        class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
-                                    Voir la recette
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Boisson 3 -->
-                    <div class="carousel-item p-2">
-                        <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                            <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307" alt="Espresso Martini"
-                                 class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="font-bold mb-2">Espresso Martini</h3>
-                                <div class="flex justify-between text-sm text-gray-600 mb-3">
-                                    <span>6 min</span>
-                                    <span>1 portion</span>
-                                </div>
-                                <button onclick="openRecipe('espressomartini')"
-                                        class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
-                                    Voir la recette
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-center mt-4">
-                    <button onclick="moveCarousel(-1, 'drinksRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">
-                        &lt;
-                    </button>
-                    <button onclick="moveCarousel(1, 'drinksRecipes')" class="mx-2 px-4 py-2 bg-gray-200 rounded-full">
-                        &gt;
                     </button>
                 </div>
             </div>
@@ -296,7 +156,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Dessert 1 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713" alt="Mousse au chocolat"
+                <img src="moussechoco.jpg" alt="Mousse au chocolat"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="font-bold mb-2">Mousse au Chocolat</h3>
@@ -305,6 +165,23 @@
                         <span>4 portions</span>
                     </div>
                     <button onclick="openRecipe('mousse')"
+                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                        Voir la recette
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dessert 1 -->
+            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                <img src="cookie.jpg" alt="Mousse au chocolat"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Cookie au Chocolat</h3>
+                    <div class="flex justify-between text-sm text-gray-600 mb-3">
+                        <span>35 min</span>
+                        <span>10 cookies</span>
+                    </div>
+                    <button onclick="openRecipe('cookie')"
                             class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
                         Voir la recette
                     </button>
@@ -371,7 +248,9 @@
             <img id="recipeImage" src="" alt="" class="w-full h-64 object-cover rounded mb-6">
 
             <div class="flex border-b mb-4">
-                <button id="ingredientsTab" class="px-4 py-2 font-medium border-b-2 border-amber-500 text-black">Ingrédients</button>
+                <button id="ingredientsTab" class="px-4 py-2 font-medium border-b-2 border-amber-500 text-black">
+                    Ingrédients
+                </button>
                 <button id="preparationTab" class="px-4 py-2 font-medium text-gray-500 border-b-0">Préparation</button>
             </div>
 
@@ -434,7 +313,7 @@
             },
             'sandwich': {
                 title: "Sandwich Équilibré",
-                image: "https://images.unsplash.com/photo-1533022139390-e31c08d0f6eb",
+                image: "sandwich.jpg",
                 ingredients: [
                     "2 tranches de pain complet",
                     "1 tranche de fromage",
@@ -452,7 +331,7 @@
             },
             'mousse': {
                 title: "Mousse au Chocolat",
-                image: "https://images.unsplash.com/photo-1562440499-64c9a111f713",
+                image: "moussechoco.jpg",
                 ingredients: [
                     "200g de chocolat noir",
                     "6 œufs",
@@ -466,6 +345,26 @@
                     "Montez les blancs en neige avec le sel, ajoutez le sucre",
                     "Incorporez délicatement les blancs à la préparation au chocolat",
                     "Réfrigérez au moins 3 heures avant de servir"
+                ]
+            },
+            'cookie': {
+                title: "Cookie au chocolat",
+                image: "cookie.jpg",
+                ingredients: [
+                    "180g de farine",
+                    "1 pincée de sel",
+                    "1/2 sachet de levure chimique",
+                    "100g de sucre",
+                    "60g de beurre mou",
+                    "1/2 sachet de sucre vanillé",
+                    "1 œuf",
+                    "100g de pépites de chocolat"
+                ],
+                preparation: [
+                    "Préchauffez le four à 180°C",
+                    "Melangez dans l'ordre tous ces ingrédients jusqu'au pepites de chocolat",
+                    "Lorsque la pâte est souple, ajoutez les pépites de chocolat",
+                    "Enfournez à 180°C pendant 10-12 minutes",
                 ]
             },
             'mojito': {
@@ -573,6 +472,15 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        // Ajouter cet event listener pour gérer le clic en dehors du popup
+        document.getElementById('recipePopup').addEventListener('click', function (event) {
+            // Si l'utilisateur clique sur l'arrière-plan (le div avec l'id recipePopup)
+            // et non sur le contenu du popup lui-même
+            if (event.target === this) {
+                closeRecipe();
+            }
         });
     });
 </script>
