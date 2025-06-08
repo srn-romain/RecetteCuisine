@@ -390,21 +390,21 @@
                 title: "Bavarois à la Fraise",
                 image: "fraisier.jpg",
                 ingredients: [
-                    "Pour la génoise :",
-                    "2 œufs",
-                    "75g de sucre",
-                    "70g de farine",
-                    "4cl de lait",
-                    "<b>Pour la mousse à la fraise :</b>",
-                    "500g de fraises",
-                    "80g de sucre",
-                    "5 feuilles de gélatine",
-                    "40cl de crème fluide entière",
-                    "50g de sucre glace",
-                    "Pour le miroir :",
-                    "250g de fraises",
-                    "50g de sucre",
-                    "2 feuilles de gélatine"
+                    { type: "subtitle", text: "Pour la génoise :" },
+                    { type: "ingredient", text: "2 œufs" },
+                    { type: "ingredient", text: "75g de sucre" },
+                    { type: "ingredient", text: "70g de farine" },
+                    { type: "ingredient", text: "4cl de lait" },
+                    { type: "subtitle", text: "Pour la mousse à la fraise :" },
+                    { type: "ingredient", text: "500g de fraises" },
+                    { type: "ingredient", text: "80g de sucre" },
+                    { type: "ingredient", text: "5 feuilles de gélatine" },
+                    { type: "ingredient", text: "40cl de crème fluide entière" },
+                    { type: "ingredient", text: "50g de sucre glace" },
+                    { type: "subtitle", text: "Pour le miroir :" },
+                    { type: "ingredient", text: "250g de fraises" },
+                    { type: "ingredient", text: "50g de sucre" },
+                    { type: "ingredient", text: "2 feuilles de gélatine" }
                 ],
                 preparation: [
                     "Préparez la génoise. Séparez les blancs des jaunes d'œuf. Ajoutez le sucre, la farine et le lait aux jaunes.",
@@ -482,8 +482,28 @@
             document.getElementById('recipeImage').src = recipe.image;
             document.getElementById('recipeImage').alt = recipe.title;
 
+            // Remplacez cette partie dans la fonction openRecipe
             const ingredientsList = document.getElementById('ingredientsList');
-            ingredientsList.innerHTML = recipe.ingredients.map(i => `<li>${i}</li>`).join('');
+            ingredientsList.innerHTML = '';
+
+            recipe.ingredients.forEach(item => {
+                const element = document.createElement('li');
+
+                if (typeof item === 'object' && item.type === 'subtitle') {
+                    // Pour les sous-titres : pas de puce et en gras
+                    element.innerHTML = `<strong class="block mt-3 mb-1">${item.text}</strong>`;
+                    element.classList.remove('list-disc');
+                    element.style.listStyleType = 'none';
+                } else if (typeof item === 'object' && item.type === 'ingredient') {
+                    // Pour les ingrédients normaux
+                    element.textContent = item.text;
+                } else {
+                    // Pour la compatibilité avec l'ancien format
+                    element.textContent = item;
+                }
+
+                ingredientsList.appendChild(element);
+            });
 
             const preparationSteps = document.getElementById('preparationSteps');
             preparationSteps.innerHTML = recipe.preparation.map(s => `<li>${s}</li>`).join('');
