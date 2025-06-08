@@ -73,8 +73,7 @@
 <!-- Navigation simplifiée -->
 <header class="bg-white shadow-sm sticky top-0 z-50">
     <nav class="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center">
-        <div class="text-2xl font-bold text-green-800 mb-2 md:mb-0 md:mr-8">Savoureux</div>
-        <div class="flex space-x-4">
+        <div class="text-2xl font-bold text-green-800 mb-2 md:mb-0 md:mr-8 cursor-pointer" id="brand-title">Savoureux</div>        <div class="flex space-x-4">
             <a href="#plats-section" class="px-3 py-2 rounded-md bg-amber-500 text-white">Repas Étudiant</a>
             <a href="#desserts-section" class="px-3 py-2 rounded-md">Desserts</a>
             <a href="#boissons-section" class="px-3 py-2 rounded-md">Boissons</a>
@@ -558,6 +557,21 @@
             if (event.target === this) {
                 closeRecipe();
             }
+        });
+
+        // Savoureux logo et retour en haut
+        document.querySelector('header nav div.text-2xl').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        document.getElementById('brand-title').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     });
 </script>
