@@ -157,15 +157,15 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Dessert 1 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                <img src="moussechoco.jpg" alt="Mousse au chocolat"
+                <img src="fondantchoco.jpeg" alt="Fondant au chocolat"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
-                    <h3 class="font-bold mb-2">Mousse au Chocolat</h3>
+                    <h3 class="font-bold mb-2">Fondant au Chocolat</h3>
                     <div class="flex justify-between text-sm text-gray-600 mb-3">
                         <span>30 min</span>
                         <span>4 portions</span>
                     </div>
-                    <button onclick="openRecipe('mousse')"
+                    <button onclick="openRecipe('fondant')"
                             class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
                         Voir la recette
                     </button>
@@ -206,6 +206,23 @@
                 </div>
             </div>
 
+            <!-- Dessert 4 -->
+            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                <img src="banane.png" alt="Bavarois à la Fraise"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Gâteau à la banane</h3>
+                    <div class="flex justify-between text-sm text-gray-600 mb-3">
+                        <span>20 min</span>
+                        <span>4 personnes</span>
+                    </div>
+                    <button onclick="openRecipe('banana')"
+                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                        Voir la recette
+                    </button>
+                </div>
+            </div>
+
             <!-- Ajouter des desserts ici -->
         </div>
     </div>
@@ -218,7 +235,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Boisson 1 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b" alt="Mojito"
+                <img src="mojito.jpg" alt="Mojito"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="font-bold mb-2">Mojito</h3>
@@ -257,9 +274,14 @@
 <!-- Popup Recette -->
 <div id="recipePopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
-            <h2 id="recipeTitle" class="text-xl font-bold"></h2>
-            <button onclick="closeRecipe()" class="text-2xl">&times;</button>
+        <div class="sticky top-0 bg-white p-4 border-b">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h2 id="recipeTitle" class="text-xl font-bold"></h2>
+                    <div id="recipeSource" class="text-sm text-gray-600 mt-1 hidden"></div>
+                </div>
+                <button onclick="closeRecipe()" class="text-2xl">&times;</button>
+            </div>
         </div>
 
         <div class="p-6">
@@ -347,26 +369,30 @@
                     "Coupez en deux et servez"
                 ]
             },
-            'mousse': {
-                title: "Mousse au Chocolat",
-                image: "moussechoco.jpg",
+            'fondant': {
+                title: "Fondant au Chocolat",
+                source: `<a href="https://cuisine.journaldesfemmes.fr/recette/337761-gateau-au-chocolat-fondant" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Journal des femmes</a>`,
+                image: "fondantchoco.jpeg",
                 ingredients: [
                     "200g de chocolat noir",
-                    "6 œufs",
-                    "50g de sucre",
-                    "Une pincée de sel"
+                    "4 œufs",
+                    "150g de sucre",
+                    "80g de farine",
+                    "200g de beurre"
                 ],
                 preparation: [
-                    "Faites fondre le chocolat au bain-marie",
-                    "Séparez les blancs des jaunes d'œufs",
-                    "Mélangez les jaunes avec le chocolat fondu",
-                    "Montez les blancs en neige avec le sel, ajoutez le sucre",
-                    "Incorporez délicatement les blancs à la préparation au chocolat",
-                    "Réfrigérez au moins 3 heures avant de servir"
+                    "Préchauffer le four à 200°C (thermostat 6).",
+                    "Casser la tablette de chocolat dans un petit saladier. Rajouter 4 cuillères d'eau et faire fondre au micro-ondes. Attention de ne pas cuire le chocolat.",
+                    "Faire fondre le beurre dans un autre petit saladier au micro-ondes et le rajouter au saladier du chocolat fondu. Mélanger.",
+                    "Dans un grand saladier, mélanger les œufs et le sucre, puis la farine.",
+                    "Verser le chocolat fondu dans le grand saladier et mélanger jusqu'à l'obtention d'une pâte homogène.",
+                    "Verser dans un moule beurré et fariné.",
+                    "Faire cuire 25 minutes environ (ajuster ce temps de cuisson pour obtenir un cœur plus ou moins fondant)."
                 ]
             },
             'cookie': {
                 title: "Cookie au chocolat",
+                source: `<a href="cookieRecette.JPG" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Photo Corinne Malilé</a>`,
                 image: "cookie.jpg",
                 ingredients: [
                     "180g de farine",
@@ -387,6 +413,7 @@
             },
             'fraisier': {
                 title: "Bavarois à la Fraise",
+                source: `<a href="https://www.lesgateauxdesteph.com/2018/04/bavarois-a-la-fraise.html" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Overblog Stéph</a>`,
                 image: "fraisier.jpg",
                 ingredients: [
                     { type: "subtitle", text: "Pour la génoise :" },
@@ -423,9 +450,30 @@
                     "Pour démouler, passez un couteau lisse tout autour du cercle pour décoller la mousse et levez doucement. Décorez avec quelques fraises supplémentaires."
                 ]
             },
+            'banana': {
+                title: "Gâteau à la Banane",
+                source: `<a href="bananeGateauRecette.jpg" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Recette Mamie</a>`,
+                image: "banane.png",
+                ingredients: [
+                    "125g de farine",
+                    "125g de sucre",
+                    "125g de beurre",
+                    "2 œufs",
+                    "2 bananes bien mûres",
+                    "1 sachet de levure chimique"
+                ],
+                preparation: [
+                    "Préchauffer le four à 180°C.",
+                    "Regrouper tous les ingrédiants dans l'ordre et mixer le tout.",
+                    "Verser la préparation dans un moule beurré et fariné.",
+                    "Enfourner pendant 20 minutes à 180°C.",
+                    "Vérifier la cuisson avec la pointe d'un couteau qui doit ressortir sèche.",
+                    "Laisser refroidir avant de démouler."
+                ]
+            },
             'mojito': {
                 title: "Mojito",
-                image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b",
+                image: "mojito.jpg",
                 ingredients: [
                     "6 feuilles de menthe",
                     "1/2 citron vert",
@@ -476,6 +524,20 @@
         window.openRecipe = function (recipeId) {
             const recipe = recipes[recipeId];
             if (!recipe) return;
+
+            // Gestion de l'affichage de la source
+            const sourceElement = document.getElementById('recipeSource');
+            if (recipe.source) {
+                // Vérifier si la source contient du HTML (comme un lien)
+                if (recipe.source.includes('<a')) {
+                    sourceElement.innerHTML = `Source : ${recipe.source}`;
+                } else {
+                    sourceElement.textContent = `Source : ${recipe.source}`;
+                }
+                sourceElement.classList.remove('hidden');
+            } else {
+                sourceElement.classList.add('hidden');
+            }
 
             document.getElementById('recipeTitle').textContent = recipe.title;
             document.getElementById('recipeImage').src = recipe.image;
