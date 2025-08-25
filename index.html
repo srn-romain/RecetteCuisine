@@ -100,7 +100,7 @@
                 <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c" alt="Pâtes Rapides"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
-                    <h3 class="font-bold mb-2">Pâtes Rapides</h3>
+                    <h3 class="font-bold mb-2">Pâtes</h3>
                     <div class="flex justify-between text-sm text-gray-600 mb-3">
                         <span>5 min</span>
                         <span>2 portions</span>
@@ -117,7 +117,7 @@
                 <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26" alt="Omelette"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
-                    <h3 class="font-bold mb-2">Omelette Simple</h3>
+                    <h3 class="font-bold mb-2">Omelette</h3>
                     <div class="flex justify-between text-sm text-gray-600 mb-3">
                         <span>10 min</span>
                         <span>1 portion</span>
@@ -134,7 +134,7 @@
                 <img src="sandwich.jpg" alt="Sandwich"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
-                    <h3 class="font-bold mb-2">Sandwich Équilibré</h3>
+                    <h3 class="font-bold mb-2">Sandwich</h3>
                     <div class="flex justify-between text-sm text-gray-600 mb-3">
                         <span>7 min</span>
                         <span>1 portion</span>
@@ -218,6 +218,23 @@
                         <span>4 personnes</span>
                     </div>
                     <button onclick="openRecipe('banana')"
+                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                        Voir la recette
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dessert 5 -->
+            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                <img src="speculoos.jpeg" alt="Tiramisu Speculoos"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Tiramisu</h3>
+                    <div class="flex justify-between text-sm text-gray-600 mb-3">
+                        <span>20 min</span>
+                        <span>4 personnes</span>
+                    </div>
+                    <button onclick="openRecipe('tiramisu')"
                             class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
                         Voir la recette
                     </button>
@@ -490,7 +507,27 @@
                     "Complétez avec de l'eau gazeuse",
                     "Décorez avec une rondelle de citron vert et une feuille de menthe"
                 ]
-            }
+            },
+            'tiramisu': {
+                title: "Gâteau à la Banane",
+                image: "speculoos.jpeg",
+                ingredients: [
+                    "80g de sucre roux",
+                    "300g de speculoos",
+                    "250g de mascarpone en poudre",
+                    "3 œufs",
+                    "1 sachet de sucre vanillé"
+                ],
+                preparation: [
+                    "Séparer le blanc et les jaunes. Incorporer le sucre et le sucre vanillé dans les jaunes.",
+                    "Ajouter le mascarpone et mélanger jusqu'à obtenir une crème lisse.",
+                    "Monter les blancs en neige et les incorporer délicatement à la préparation.",
+                    "Disposer le speculoos dans le fond d'un plat.",
+                    "Recouvrir avec la crème au mascarpone.",
+                    "Ajouter une seconde couche de speculoos, puis le reste de la crème.",
+                    "Lisser le dessus et réfrigérer au moins 6 à 8 heures avant de servir."
+                ]
+            },
             // Ajoutez d'autres recettes selon vos besoins
         };
 
