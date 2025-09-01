@@ -75,7 +75,7 @@
     <nav class="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center">
         <div class="text-2xl font-bold text-green-800 mb-2 md:mb-0 md:mr-8 cursor-pointer" id="brand-title">Savoureux</div>
         <div class="flex space-x-4 w-full md:w-auto justify-center">
-            <a href="#plats-section" class="px-3 py-2 rounded-md bg-amber-500 text-white text-center">Repas Étudiant</a>
+            <a href="#plats-section" class="px-3 py-2 rounded-md bg-amber-500 text-white text-center">Plats</a>
             <a href="#desserts-section" class="px-3 py-2 rounded-md text-center">Desserts</a>
             <a href="#boissons-section" class="px-3 py-2 rounded-md text-center">Boissons</a>
         </div>
@@ -85,25 +85,28 @@
 <!-- Titre principal -->
 <section class="py-12 hero-bg text-white">
     <div class="container mx-auto px-4 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">Recettes Faciles et Savoureuses</h1>
-        <p class="text-xl max-w-2xl mx-auto">Découvrez des recettes simples pour tous les jours</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Le Savoureux</h1>
+        <p class="text-xl max-w-2xl mx-auto">
+            Recette simple & efficace
+            <span id="recipe-count" class="block mt-2 text-lg font-semibold"></span>
+        </p>
     </div>
 </section>
 
-<!-- Section Plats Étudiant -->
+<!-- Section Plats Plats -->
 <section id="plats-section" class="py-12 bg-white">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Repas Étudiants</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Plats</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Recette 1 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c" alt="Pâtes Rapides"
+                <img src="pate.png" alt="Salade de pâtes froides au pesto"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
-                    <h3 class="font-bold mb-2">Pâtes</h3>
+                    <h3 class="font-bold mb-2">Salade de pâtes froides au pesto</h3>
                     <div class="flex justify-between text-sm text-gray-600 mb-3">
-                        <span>5 min</span>
-                        <span>2 portions</span>
+                        <span>10 min</span>
+                        <span>5 portions</span>
                     </div>
                     <button onclick="openRecipe('pates')"
                             class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
@@ -114,15 +117,15 @@
 
             <!-- Recette 2 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26" alt="Omelette"
+                <img src="viande.png" alt="Bœuf haché aux poivrons"
                      class="w-full h-48 object-cover">
                 <div class="p-4">
-                    <h3 class="font-bold mb-2">Omelette</h3>
+                    <h3 class="font-bold mb-2">Bœuf haché aux poivrons</h3>
                     <div class="flex justify-between text-sm text-gray-600 mb-3">
                         <span>10 min</span>
-                        <span>1 portion</span>
+                        <span>4 portion</span>
                     </div>
-                    <button onclick="openRecipe('omelette')"
+                    <button onclick="openRecipe('viande')"
                             class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
                         Voir la recette
                     </button>
@@ -130,21 +133,6 @@
             </div>
 
             <!-- Recette 3 -->
-            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
-                <img src="sandwich.jpg" alt="Sandwich"
-                     class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-bold mb-2">Sandwich</h3>
-                    <div class="flex justify-between text-sm text-gray-600 mb-3">
-                        <span>7 min</span>
-                        <span>1 portion</span>
-                    </div>
-                    <button onclick="openRecipe('sandwich')"
-                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
-                        Voir la recette
-                    </button>
-                </div>
-            </div>
 
             <!-- Ajouter des plats ici -->
         </div>
@@ -268,6 +256,40 @@
                 </div>
             </div>
 
+            <!-- Boisson 2 -->
+            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                <img src="sotb.jpeg" alt="Sex On The Beach"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Sex On The Beach</h3>
+                    <div class="flex justify-between text-sm text-gray-600 mb-3">
+                        <span>1 min</span>
+                        <span>1 portion</span>
+                    </div>
+                    <button onclick="openRecipe('sotb')"
+                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                        Voir la recette
+                    </button>
+                </div>
+            </div>
+
+            <!-- Boisson 3 -->
+            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                <img src="punch.jpeg" alt="Sex On The Beach"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Punch</h3>
+                    <div class="flex justify-between text-sm text-gray-600 mb-3">
+                        <span>10 min</span>
+                        <span>10 à 12 personnes</span>
+                    </div>
+                    <button onclick="openRecipe('punch')"
+                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                        Voir la recette
+                    </button>
+                </div>
+            </div>
+
             <!-- Ajouter des boissons ici -->
         </div>
     </div>
@@ -333,58 +355,37 @@
         // Compléter les données des recettes manquantes
         const recipes = {
             'pates': {
-                title: "Pâtes Rapides",
-                image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+                title: "Salade de pâtes froides au pesto",
+                image: "pate.png",
                 ingredients: [
-                    "200g de pâtes",
-                    "2 cuillères à soupe d'huile d'olive",
-                    "1 gousse d'ail",
-                    "Parmesan râpé",
-                    "Sel et poivre"
+                    "500 g de pâtes courtes (fusilli, penne, farfalle)",
+                    "3 c. à soupe de pesto",
+                    "Tomates cerises",
+                    "Mozzarella",
+                    "Basilic"
                 ],
                 preparation: [
-                    "Faites bouillir de l'eau dans une casserole",
-                    "Ajoutez les pâtes et laissez cuire 8-10 minutes",
-                    "Égouttez les pâtes en gardant un peu d'eau de cuisson",
-                    "Dans une poêle, faites chauffer l'huile avec l'ail",
-                    "Ajoutez les pâtes et mélangez bien",
-                    "Servez avec du parmesan et poivrez"
+                    "Cuire les pâtes, rincer à l’eau froide, bien égoutter.",
+                    "Mélanger avec le pesto.",
+                    "Ajouter les accompagnements.",
+                    "Accompagnement bonus : olives, maïs, thon, œufs durs..."
                 ]
             },
-            'omelette': {
-                title: "Omelette Simple",
-                image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26",
+            'viande': {
+                title: "Bœuf haché aux poivrons",
+                image: "viande.png",
                 ingredients: [
-                    "3 œufs",
-                    "2 cuillères à soupe de lait",
-                    "1 noisette de beurre",
-                    "Sel et poivre",
-                    "Herbes fraîches (optionnel)"
+                    "400 g de viande hachée",
+                    "2–3 poivrons (de différentes couleurs)",
+                    "1 oignon",
+                    "2 gousses d’ail"
                 ],
                 preparation: [
-                    "Battez les œufs dans un bol avec le lait, le sel et le poivre",
-                    "Faites fondre le beurre dans une poêle à feu moyen",
-                    "Versez les œufs battus dans la poêle",
-                    "Laissez cuire 2-3 minutes en soulevant les bords",
-                    "Pliez l'omelette en deux et servez immédiatement"
-                ]
-            },
-            'sandwich': {
-                title: "Sandwich Équilibré",
-                image: "sandwich.jpg",
-                ingredients: [
-                    "2 tranches de pain complet",
-                    "1 tranche de fromage",
-                    "Quelques tranches de tomate",
-                    "Salade verte",
-                    "1 cuillère à café de mayonnaise ou moutarde"
-                ],
-                preparation: [
-                    "Tartinez les tranches de pain avec la mayonnaise ou la moutarde",
-                    "Disposez les tranches de fromage sur une tranche de pain",
-                    "Ajoutez les tranches de tomate et la salade",
-                    "Refermez avec la seconde tranche de pain",
-                    "Coupez en deux et servez"
+                    "Faire revenir l’oignon et l’ail dans un peu d’huile.",
+                    "Ajouter la viande hachée, cuire jusqu’à ce qu’elle soit dorée.",
+                    "Mettre les poivrons en morceaux.",
+                    "Assaisonner (sel, poivre, paprika).",
+                    "Laisser mijoter 10–15 min, servir chaud."
                 ]
             },
             'fondant': {
@@ -489,25 +490,6 @@
                     "Laisser refroidir avant de démouler."
                 ]
             },
-            'mojito': {
-                title: "Mojito",
-                image: "mojito.jpg",
-                ingredients: [
-                    "6 feuilles de menthe",
-                    "1/2 citron vert",
-                    "2 cuillères à café de sucre",
-                    "4cl de rhum blanc",
-                    "Eau gazeuse",
-                    "Glaçons"
-                ],
-                preparation: [
-                    "Pilez les feuilles de menthe avec le sucre et le jus du citron vert",
-                    "Ajoutez le rhum et mélangez",
-                    "Remplissez le verre de glaçons",
-                    "Complétez avec de l'eau gazeuse",
-                    "Décorez avec une rondelle de citron vert et une feuille de menthe"
-                ]
-            },
             'tiramisu': {
                 title: "Gâteau à la Banane",
                 image: "speculoos.jpeg",
@@ -528,8 +510,66 @@
                     "Lisser le dessus et réfrigérer au moins 6 à 8 heures avant de servir."
                 ]
             },
+            'mojito': {
+                title: "Mojito",
+                image: "mojito.jpg",
+                ingredients: [
+                    "6 feuilles de menthe",
+                    "1/2 citron vert",
+                    "2 cuillères à café de sucre",
+                    "4cl de rhum blanc",
+                    "Eau gazeuse",
+                    "Glaçons"
+                ],
+                preparation: [
+                    "Pilez les feuilles de menthe avec le sucre et le jus du citron vert",
+                    "Ajoutez le rhum et mélangez",
+                    "Remplissez le verre de glaçons",
+                    "Complétez avec de l'eau gazeuse",
+                    "Décorez avec une rondelle de citron vert et une feuille de menthe"
+                ]
+            },
+            'sotb': {
+                title: "Sex On The Beach",
+                image: "sotb.jpeg",
+                ingredients: [
+                    "4cl de Vodka",
+                    "2cl de Liqueur de pêche",
+                    "6cl Cranberry",
+                    "6cl de Jus d'orange"
+                ],
+                preparation: [
+                    "Dans un verre, versez la vodka, la liqueur de pêche puis le jus d'orange",
+                    "Terminer par ajouter le jus de cranberry pour la couleur au fond du verre",
+                    "Ajoutez doucement des glaçons"
+                ]
+            },
+            'punch': {
+                title: "Punch",
+                image: "punch.jpeg",
+                ingredients: [
+                    "1 litre de jus d'orange",
+                    "1 litre de jus d'ananas",
+                    "500 ml de rhum blanc",
+                    "250 ml de rhum ambré",
+                    "200 ml de sirop de grenadine",
+                    "Tranches d'oranges, citrons et morceaux d'ananas pour la décoration"
+                ],
+                preparation: [
+                    "Dans un grand saladier, mélangez 1 litre de jus d'orange, 1 litre de jus d'ananas, 500 ml de rhum blanc et 250 ml de rhum ambré.",
+                    "Ajoutez 200 ml de sirop de grenadine pour une touche sucrée et une belle couleur.",
+                    "Incorporez des tranches d'oranges, de citrons et des morceaux d'ananas pour plus de saveur.",
+                    "Laissez reposer au réfrigérateur pendant au moins 2 heures avant de servir.",
+                    "Servez le punch bien frais, avec des glaçons et décorez chaque verre avec une tranche de fruit."
+                ]
+            },
             // Ajoutez d'autres recettes selon vos besoins
         };
+        const count = Object.keys(recipes).length;
+        const countElement = document.getElementById('recipe-count');
+        if (countElement) {
+            countElement.textContent = `${count} recettes disponibles`;
+        }
 
         // Navigation réactive
         const sections = document.querySelectorAll('section[id]');
