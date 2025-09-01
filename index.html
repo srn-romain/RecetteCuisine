@@ -290,6 +290,23 @@
                 </div>
             </div>
 
+            <!-- Boisson 4 -->
+            <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
+                <img src="tequila.jpg" alt="Tequila Sunrise"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold mb-2">Tequila Sunrise</h3>
+                    <div class="flex justify-between text-sm text-gray-600 mb-3">
+                        <span>1 min</span>
+                        <span>1 portion</span>
+                    </div>
+                    <button onclick="openRecipe('tequila')"
+                            class="w-full py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition-colors">
+                        Voir la recette
+                    </button>
+                </div>
+            </div>
+
             <!-- Ajouter des boissons ici -->
         </div>
     </div>
@@ -424,10 +441,10 @@
                     "100g de pépites de chocolat"
                 ],
                 preparation: [
-                    "Préchauffez le four à 180°C",
-                    "Melangez dans l'ordre tous ces ingrédients jusqu'au pepites de chocolat",
-                    "Lorsque la pâte est souple, ajoutez les pépites de chocolat",
-                    "Enfournez à 180°C pendant 10-12 minutes",
+                    "Préchauffez le four à 180°C.",
+                    "Melangez dans l'ordre tous ces ingrédients jusqu'au pepites de chocolat.",
+                    "Lorsque la pâte est souple, ajoutez les pépites de chocolat.",
+                    "Enfournez à 180°C pendant 10-12 minutes.",
                 ]
             },
             'fraisier': {
@@ -514,19 +531,19 @@
                 title: "Mojito",
                 image: "mojito.jpg",
                 ingredients: [
-                    "6 feuilles de menthe",
-                    "1/2 citron vert",
-                    "2 cuillères à café de sucre",
-                    "4cl de rhum blanc",
-                    "Eau gazeuse",
-                    "Glaçons"
+                    "6 feuilles de menthe.",
+                    "1/2 citron vert.",
+                    "2 cuillères à café de sucre.",
+                    "4cl de rhum blanc.",
+                    "Eau gazeuse.",
+                    "Glaçons."
                 ],
                 preparation: [
-                    "Pilez les feuilles de menthe avec le sucre et le jus du citron vert",
-                    "Ajoutez le rhum et mélangez",
-                    "Remplissez le verre de glaçons",
-                    "Complétez avec de l'eau gazeuse",
-                    "Décorez avec une rondelle de citron vert et une feuille de menthe"
+                    "Pilez les feuilles de menthe avec le sucre et le jus du citron vert.",
+                    "Ajoutez le rhum et mélangez.",
+                    "Remplissez le verre de glaçons.",
+                    "Complétez avec de l'eau gazeuse.",
+                    "Décorez avec une rondelle de citron vert et une feuille de menthe."
                 ]
             },
             'sotb': {
@@ -539,9 +556,9 @@
                     "6cl de Jus d'orange"
                 ],
                 preparation: [
-                    "Dans un verre, versez la vodka, la liqueur de pêche puis le jus d'orange",
-                    "Terminer par ajouter le jus de cranberry pour la couleur au fond du verre",
-                    "Ajoutez doucement des glaçons"
+                    "Dans un verre, versez la vodka, la liqueur de pêche puis le jus d'orange.",
+                    "Terminer par ajouter le jus de cranberry pour créer un effet dégradé.",
+                    "Ajoutez doucement des glaçons."
                 ]
             },
             'punch': {
@@ -550,18 +567,28 @@
                 ingredients: [
                     "1 litre de jus d'orange",
                     "1 litre de jus d'ananas",
-                    "500 ml de rhum blanc",
-                    "250 ml de rhum ambré",
-                    "200 ml de sirop de grenadine",
-                    "Tranches d'oranges, citrons et morceaux d'ananas pour la décoration"
+                    "750 ml de rhum",
+                    "200 ml de sirop de grenadine"
                 ],
                 preparation: [
-                    "Dans un grand saladier, mélangez 1 litre de jus d'orange, 1 litre de jus d'ananas, 500 ml de rhum blanc et 250 ml de rhum ambré.",
-                    "Ajoutez 200 ml de sirop de grenadine pour une touche sucrée et une belle couleur.",
-                    "Incorporez des tranches d'oranges, de citrons et des morceaux d'ananas pour plus de saveur.",
+                    "Dans un grand saladier, mélangez le jus d'orange, le jus d'ananas, le rhum puis la grenadine.",
                     "Laissez reposer au réfrigérateur pendant au moins 2 heures avant de servir.",
                     "Servez le punch bien frais, avec des glaçons et décorez chaque verre avec une tranche de fruit."
-                ]
+                ],
+            },
+            'tequila': {
+                title: "Tequila sunrise",
+                image: "tequila.jpg",
+                ingredients: [
+                    "4cl de Tequila",
+                    "12cl de Jus d'orange",
+                    "2cl de Sirop de grenadine"
+                ],
+                preparation: [
+                    "Versez la tequila dans un verre.",
+                    "Ajoutez le jus d'orange.",
+                    "Versez doucement la grenadine pour créer un effet dégradé puis ajouter doucement quelques glaçons."
+                ],
             },
             // Ajoutez d'autres recettes selon vos besoins
         };
