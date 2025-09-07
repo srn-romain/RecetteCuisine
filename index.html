@@ -96,7 +96,7 @@
 <!-- Section Plats Plats -->
 <section id="plats-section" class="py-12 bg-white">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Plats</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Plats <span id="plats-count" class="text-lg font-semibold ml-2"></span></h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Recette 1 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
@@ -278,7 +278,7 @@
 <!-- Section Desserts -->
 <section id="desserts-section" class="py-12 bg-gray-50">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Desserts</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Desserts <span id="desserts-count" class="text-lg font-semibold ml-2"></span></h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Dessert 1 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
@@ -373,7 +373,7 @@
 <!-- Section Boissons -->
 <section id="boissons-section" class="py-12 bg-white">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Boissons</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center text-green-800">Boissons <span id="boissons-count" class="text-lg font-semibold ml-2"></span></h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Boisson 1 -->
             <div class="recipe-card border rounded-lg overflow-hidden shadow-md">
@@ -613,7 +613,7 @@
             },
             'pizza_tartine_pain_mie': {
                 title: "Pizza Tartine Pain de Mie",
-                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Source Instagram</a>`,
+                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
                 image: "pizza_tartine_pain_mie.png",
                 ingredients: [
                     "9 tranches de pain de mie",
@@ -635,7 +635,7 @@
             },
             'omelette_speciale': {
                 title: "Omelette Spéciale",
-                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Source Instagram</a>`,
+                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
                 image: "omelette_speciale.png",
                 ingredients: [
                     "1 grosse tomate ou 2 petites",
@@ -657,7 +657,7 @@
             },
             'courgettes_chevre_miel': {
                 title: "Courgettes Snackées Chèvre-Miel",
-                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Source Instagram</a>`,
+                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
                 image: "courgettes_chevre_miel.png",
                 ingredients: [
                     "1 courgette",
@@ -677,7 +677,7 @@
             },
             'tarte_courgette_mozza_pesto': {
                 title: "Tarte Courgette / Mozza / Pesto",
-                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Source Instagram</a>`,
+                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
                 image: "tarte_courgette_mozza_pesto.png",
                 ingredients: [
                     "1 pâte feuilletée (230 g)",
@@ -698,7 +698,7 @@
             },
             'gaufres_riz_sushi': {
                 title: "Gaufres de Riz façon Sushi",
-                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Source Instagram</a>`,
+                source: `<a href="#" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
                 image: "gaufres_riz_sushi.png",
                 ingredients: [
                     "100 g de riz",
@@ -1057,6 +1057,19 @@
                 behavior: 'smooth'
             });
         });
+
+        // Compter le nombre de recettes par catégorie
+        function updateRecipeCounts() {
+            const platsCount = document.querySelectorAll('#plats-section .recipe-card').length;
+            const dessertsCount = document.querySelectorAll('#desserts-section .recipe-card').length;
+            const boissonsCount = document.querySelectorAll('#boissons-section .recipe-card').length;
+
+            document.getElementById('plats-count').textContent = `${platsCount} recettes`;
+            document.getElementById('desserts-count').textContent = `${dessertsCount} recettes`;
+            document.getElementById('boissons-count').textContent = `${boissonsCount} recettes`;
+        }
+
+        updateRecipeCounts();
     });
 </script>
 </body>
