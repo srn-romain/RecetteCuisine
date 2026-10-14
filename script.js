@@ -1,0 +1,586 @@
+document.addEventListener('DOMContentLoaded', function () {
+    // Compléter les données des recettes manquantes
+    const recipes = {
+        'pates': {
+            title: "Salade de pâtes froides au pesto",
+            image: "pate.png",
+            ingredients: [
+                "500 g de pâtes courtes (fusilli, penne, farfalle)",
+                "3 c. à soupe de pesto",
+                "Tomates cerises",
+                "Mozzarella",
+                "Basilic"
+            ],
+            preparation: [
+                "Cuire les pâtes, rincer à l’eau froide, bien égoutter.",
+                "Mélanger avec le pesto.",
+                "Ajouter les accompagnements.",
+                "Accompagnement bonus : olives, maïs, thon, œufs durs..."
+            ]
+        },
+        'viande': {
+            title: "Bœuf haché aux poivrons",
+            image: "viande.png",
+            ingredients: [
+                "400 g de viande hachée",
+                "2–3 poivrons (de différentes couleurs)",
+                "1 oignon",
+                "2 gousses d’ail"
+            ],
+            preparation: [
+                "Faire revenir l’oignon et l’ail dans un peu d’huile.",
+                "Ajouter la viande hachée, cuire jusqu’à ce qu’elle soit dorée.",
+                "Mettre les poivrons en morceaux.",
+                "Assaisonner (sel, poivre, paprika).",
+                "Laisser mijoter 10–15 min, servir chaud."
+            ]
+        },
+        'cake_courgette_chevre': {
+            title: "Cake courgette & chèvre",
+            source: `<a href="https://www.instagram.com/reel/DOJTdvEjDde/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "cake.png",
+            ingredients: [
+                "1 belle courgette",
+                "4 œufs",
+                "1 yaourt nature",
+                "1 filet d’huile d’olive",
+                "220 g de farine",
+                "1 sachet de levure chimique",
+                "Sel, poivre",
+                "1 bûche de chèvre"
+            ],
+            preparation: [
+                "Râper la courgette.",
+                "Mélanger les œufs, le yaourt et l’huile d’olive.",
+                "Ajouter la farine, la levure, le sel et le poivre.",
+                "Incorporer la courgette râpée puis la moitié du chèvre en dés.",
+                "Verser dans un moule beurré et déposer le reste du chèvre en tranches sur le dessus.",
+                "Cuire au four à 180°C pendant 1 h (vérifier avec un couteau, prolonger jusqu’à 1 h 20 si nécessaire).",
+                "Laisser refroidir avant de démouler pour qu’il se tienne mieux."
+            ]
+        },
+        'feuilletes_chevre_lardons': {
+            title: "Feuilletés au Chèvre & Lardons",
+            source: `<a href="https://www.instagram.com/reel/DN55-Uqilm4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "feuillete.png",
+            ingredients: [
+                "1 pâte feuilletée",
+                "4 càs de crème épaisse",
+                "8 rondelles de chèvre",
+                "100 g de lardons (grillés)",
+                "50 g de gruyère râpé",
+                "Thym",
+                "Poivre"
+            ],
+            preparation: [
+                "Préchauffer le four à 200°C.",
+                "Faire revenir les lardons dans une poêle sans matière grasse jusqu’à ce qu’ils soient dorés.",
+                "Couper la pâte feuilletée en 4 carrés.",
+                "Déposer une cuillère de crème au centre de chaque carré.",
+                "Ajouter 2 rondelles de chèvre, parsemer de lardons grillés et de gruyère râpé.",
+                "Replier délicatement les bords, assaisonner avec du poivre et un peu de thym.",
+                "Disposer les feuilletés sur une plaque recouverte de papier cuisson.",
+                "Enfourner à 200°C pendant 14 min, jusqu’à ce qu’ils soient dorés et bien feuilletés.",
+                "Servir chaud, accompagné d’une salade verte."
+            ]
+        },
+        'feuillete_courgettes_jambon': {
+            title: "Feuilleté Courgettes / Jambon",
+            source: `<a href="https://www.instagram.com/reel/DMu0LGBCylR/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "feuillete_courgettes_jambon.png",
+            ingredients: [
+                "2 pâtes feuilletées (230 g chacune)",
+                "2 courgettes",
+                "100 g de comté râpé",
+                "8 tranches de jambon fumé"
+            ],
+            preparation: [
+                "Préchauffer le four à 180°C.",
+                "Râper ou couper les courgettes en fines rondelles.",
+                "Étaler une pâte feuilletée sur une plaque recouverte de papier cuisson.",
+                "Répartir les courgettes et le comté râpé sur la pâte.",
+                "Ajouter les tranches de jambon par-dessus.",
+                "Recouvrir avec la deuxième pâte feuilletée et souder les bords.",
+                "Cuire au four pendant 30 minutes, jusqu’à ce que le feuilleté soit doré et bien cuit.",
+                "Laisser tiédir légèrement avant de découper et servir."
+            ]
+        },
+        'pizza_tartine_pain_mie': {
+            title: "Pizza Tartine Pain de Mie",
+            source: `<a href="https://www.instagram.com/reel/DNK2YDCipHF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "pizza_tartine_pain_mie.png",
+            ingredients: [
+                "9 tranches de pain de mie",
+                "400 g de sauce tomate cuisinée à la provençale",
+                "200 g de lardons fumés",
+                "10 cornichons",
+                "15 tomates cerises",
+                "100 g de comté râpé"
+            ],
+            preparation: [
+                "Préchauffer le four à 180°C.",
+                "Étaler la sauce tomate sur chaque tranche de pain de mie.",
+                "Répartir les lardons, les cornichons tranchés et les tomates cerises coupées en deux.",
+                "Parsemer de comté râpé.",
+                "Disposer les tartines sur une plaque recouverte de papier cuisson.",
+                "Cuire au four pendant 20 minutes, jusqu’à ce que le fromage soit fondu et doré.",
+                "Servir chaud, éventuellement accompagné d’une salade verte."
+            ]
+        },
+        'omelette_speciale': {
+            title: "Omelette Spéciale",
+            source: `<a href="https://www.instagram.com/reel/DOF_LNFCpqi/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "omelette_speciale.png",
+            ingredients: [
+                "1 grosse tomate ou 2 petites",
+                "1 poivron vert",
+                "5 œufs",
+                "Huile d’olive",
+                "Sel, poivre, curry, herbes de Provence, coriandre",
+                "1/2 verre d’eau",
+                "Pain suédois (pain polaire) pour accompagner"
+            ],
+            preparation: [
+                "Préchauffer une poêle avec un filet d’huile d’olive.",
+                "Couper la tomate et le poivron en dés.",
+                "Faire revenir les légumes dans la poêle avec 1/2 verre d’eau, sel et épices jusqu’à ce qu’ils soient tendres.",
+                "Battre les œufs avec sel, poivre et herbes, puis les verser sur les légumes.",
+                "Cuire à feu moyen jusqu’à ce que l’omelette soit bien prise.",
+                "Servir chaud avec du pain suédois."
+            ]
+        },
+        'courgettes_chevre_miel': {
+            title: "Courgettes Snackées Chèvre-Miel",
+            source: `<a href="https://www.instagram.com/reel/DK6dMzDOGtC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "courgettes_chevre_miel.png",
+            ingredients: [
+                "1 courgette",
+                "90 g de fromage de chèvre",
+                "1 poignée de pignons de pin",
+                "Miel",
+                "Sel et poivre"
+            ],
+            preparation: [
+                "Préchauffer le four à 180°C.",
+                "Couper la courgette en rondelles ou en demi-rondelles.",
+                "Cuire les courgettes seules au four pendant 30 min, puis 5 min sous fonction grill si souhaité.",
+                "Ajouter le fromage de chèvre sur les courgettes et remettre au four 3 min sous fonction grille pour le faire fondre.",
+                "Parsemer de pignons de pin.",
+                "Servir avec un filet de miel sur chaque assiette avant de déguster."
+            ]
+        },
+        'tarte_courgette_mozza_pesto': {
+            title: "Tarte Courgette / Mozza / Pesto",
+            source: `<a href="https://www.instagram.com/reel/DKwcMcMioW8/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "tarte_courgette_mozza_pesto.png",
+            ingredients: [
+                "1 pâte feuilletée (230 g)",
+                "1 courgette",
+                "250 g de mozzarella",
+                "4 c. à café de pesto rouge à la tomate",
+                "Graines de sésame"
+            ],
+            preparation: [
+                "Préchauffer le four à 180°C.",
+                "Étaler la pâte feuilletée sur une plaque recouverte de papier cuisson.",
+                "Couper la courgette en rondelles fines et la mozzarella en tranches.",
+                "Répartir le pesto sur la pâte, puis disposer les rondelles de courgette et de mozzarella par-dessus.",
+                "Parsemer de graines de sésame.",
+                "Cuire au four pendant 30 à 40 minutes jusqu’à ce que la tarte soit dorée.",
+                "Laisser tiédir légèrement avant de servir."
+            ]
+        },
+        'gaufres_riz_sushi': {
+            title: "Gaufres de Riz façon Sushi",
+            source: `<a href="https://www.instagram.com/reel/DJYx-NuJAmB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Instagram</a>`,
+            image: "gaufres_riz_sushi.png",
+            ingredients: [
+                "100 g de riz",
+                "Fromage frais",
+                "Avocat",
+                "Saumon",
+                "Mayonnaise",
+                "Sauce chili",
+                "Concombre",
+                "Oignon vert",
+                "Sésame",
+                "Feuilles de nori"
+            ],
+            preparation: [
+                "Cuire le riz selon les instructions du paquet et laisser refroidir légèrement.",
+                "Huiler légèrement un gaufrier et y déposer le riz pour former la base des gaufres.",
+                "Cuire jusqu’à obtenir un riz légèrement doré et compact.",
+                "Garnir chaque gaufre avec fromage frais, avocat tranché, saumon, concombre et oignon vert.",
+                "Ajouter un filet de mayonnaise et de sauce chili selon goût.",
+                "Parsemer de graines de sésame et de petites lanières de nori.",
+                "Servir immédiatement pour conserver le croquant du riz."
+            ]
+        },
+        'fondant': {
+            title: "Fondant au Chocolat",
+            source: `<a href="https://www.marmiton.org/recettes/recette_brownies_16951.aspx" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Marmiton</a>`,
+            image: "fondantchoco.jpeg",
+            ingredients: [
+                "250 g de chocolat noir",
+                "150 g de beurre",
+                "150 g de sucre",
+                "3 œufs",
+                "60 g de farine",
+                "1 pincée de sel",
+                "1 sachet de sucre vanillé"
+            ],
+            preparation: [
+                "Préchauffer le four à 180°C.",
+                "Faites fondre le chocolat cassé en morceaux avec le beurre.",
+                "Pendant ce temps, battez les oeufs avec le sucre jusqu'à ce que le mélange blanchisse.",
+                "Ajoutez la farine, le sucre vanillé, et ajoutez le chocolat.",
+                "Versez le tout dans un moule (beurré), et enfournez à 180°C pendant 15 min."
+            ]
+        },
+        'cookie': {
+            title: "Cookie au chocolat",
+            source: `<a href="cookieRecette.JPG" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Photo Corinne Malilé</a>`,
+            image: "cookie.jpg",
+            ingredients: [
+                "180g de farine",
+                "1 pincée de sel",
+                "1/2 sachet de levure chimique",
+                "100g de sucre",
+                "60g de beurre mou",
+                "1/2 sachet de sucre vanillé",
+                "1 œuf",
+                "100g de pépites de chocolat"
+            ],
+            preparation: [
+                "Préchauffez le four à 180°C.",
+                "Melangez dans l'ordre tous ces ingrédients jusqu'au pepites de chocolat.",
+                "Lorsque la pâte est souple, ajoutez les pépites de chocolat.",
+                "Enfournez à 180°C pendant 10-12 minutes."
+            ]
+        },
+        'fraisier': {
+            title: "Bavarois à la Fraise",
+            source: `<a href="https://www.lesgateauxdesteph.com/2018/04/bavarois-a-la-fraise.html" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Overblog Stéph</a>`,
+            image: "fraisier.JPG",
+            ingredients: [
+                { type: "subtitle", text: "Pour la génoise :" },
+                { type: "ingredient", text: "2 œufs" },
+                { type: "ingredient", text: "75g de sucre" },
+                { type: "ingredient", text: "70g de farine" },
+                { type: "ingredient", text: "4cl de lait" },
+                { type: "subtitle", text: "Pour la mousse à la fraise :" },
+                { type: "ingredient", text: "500g de fraises" },
+                { type: "ingredient", text: "80g de sucre" },
+                { type: "ingredient", text: "5 feuilles de gélatine" },
+                { type: "ingredient", text: "40cl de crème fluide entière" },
+                { type: "ingredient", text: "50g de sucre glace" },
+                { type: "subtitle", text: "Pour le miroir :" },
+                { type: "ingredient", text: "250g de fraises" },
+                { type: "ingredient", text: "50g de sucre" },
+                { type: "ingredient", text: "2 feuilles de gélatine" }
+            ],
+            preparation: [
+                "Préparez la génoise. Séparez les blancs des jaunes d'œuf. Ajoutez le sucre, la farine et le lait aux jaunes.",
+                "Montez les blancs en neige et les incorporez les délicatement à la préparation précédente.",
+                "Versez la pâte dans un moule beurré et faites cuire 12 minutes à 200° sans préchauffer le four.",
+                "Placez la génoise sur un plat de service avec un cercle pâtissier autour.",
+                "Préparez la mousse à la fraise. Équeutez et lavez les fraises. Mixez les avec le sucre en poudre.",
+                "Faites ramollir la gélatine dans un bol d'eau froide.",
+                "Pendant ce temps, mettez la purée de fraises obtenue à chauffer dans une casserole. Une fois la gélatine bien molle, faites la dissoudre dans la purée de fraises. Laissez tiédir.",
+                "Battez au fouet électrique la crème fluide et le sucre glace.",
+                "Ajoutez délicatement les fraises à la chantilly et mélangez bien.",
+                "Versez la mousse à la fraise sur la génoise et réservez au moins 2 heures au frigo avant de poursuivre.",
+                "Préparez le miroir. Équeutez et lavez les fraises. Mixez les avec le sucre.",
+                "Faites ramollir la gélatine dans un bol d'eau froide.",
+                "Pendant ce temps, mettez la purée de fraises à chauffer dans une casserole. Une fois la gélatine bien molle, la faire dissoudre dans la purée de fruits. Laissez tiédir.",
+                "Versez le miroir sur la mousse à la fraise et réservez au moins 4 heures au frigo avant de démouler.",
+                "Pour démouler, passez un couteau lisse tout autour du cercle pour décoller la mousse et levez doucement. Décorez avec quelques fraises supplémentaires."
+            ]
+        },
+        'banana': {
+            title: "Gâteau à la Banane",
+            source: `<a href="bananeGateauRecette.jpg" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition-colors">Recette Mamie</a>`,
+            image: "banane2.png",
+            ingredients: [
+                "125g de farine",
+                "125g de sucre",
+                "125g de beurre",
+                "2 œufs",
+                "2 bananes bien mûres",
+                "1 sachet de levure chimique"
+            ],
+            preparation: [
+                "Préchauffer le four à 180°C.",
+                "Regrouper tous les ingrédiants dans l'ordre et mixer le tout.",
+                "Verser la préparation dans un moule beurré et fariné.",
+                "Enfourner pendant 20 minutes à 180°C.",
+                "Vérifier la cuisson avec la pointe d'un couteau qui doit ressortir sèche.",
+                "Laisser refroidir avant de démouler."
+            ]
+        },
+        'tiramisu': {
+            title: "Tiramisu Speculoos",
+            image: "speculoos2.JPG",
+            ingredients: [
+                "80g de sucre roux",
+                "300g de speculoos",
+                "250g de mascarpone en poudre",
+                "3 œufs",
+                "1 sachet de sucre vanillé"
+            ],
+            preparation: [
+                "Séparer le blanc et les jaunes. Incorporer le sucre et le sucre vanillé dans les jaunes.",
+                "Ajouter le mascarpone et mélanger jusqu'à obtenir une crème lisse.",
+                "Monter les blancs en neige et les incorporer délicatement à la préparation.",
+                "Disposer le speculoos dans le fond d'un plat.",
+                "Recouvrir avec la crème au mascarpone.",
+                "Ajouter une seconde couche de speculoos, puis le reste de la crème.",
+                "Lisser le dessus et réfrigérer au moins 6 à 8 heures avant de servir."
+            ]
+        },
+        'crumble': {
+            title: "Crumble aux Pommes",
+            image: "crumble.jpg",
+            ingredients: [
+                "6 belles pommes (des Canada par exemple)",
+                "150 g de cassonade",
+                "150 g de farine de blé",
+                "125 g de beurre (le sortir 1/2 heure avant de commencer la recette)",
+                "1 petite cuillère de cannelle en poudre",
+                "1 sachet de sucre vanillé",
+                "Le jus d'un citron"
+            ],
+            preparation: [
+                "Préchauffer le four à thermostat 7 (210°C).",
+                "Peler, évider et découper les pommes en cubes grossiers, les répartir dans un plat allant au four, verser dessus le jus du citron, la cannelle et le sucre vanillé.",
+                "Dans un saladier, mélanger la farine et la cassonade. Puis ajouter le beurre en petits cubes et mélanger à la main de façon à former une pâte grumeleuse.",
+                "Émietter cette pâte au-dessus des pommes de façon à les recouvrir. Mettre au four une bonne 1/2 heure.",
+                "Servir tiède avec de la crème fouettée ou de la glace à la vanille."
+            ]
+        },
+        'mojito': {
+            title: "Mojito",
+            image: "mojito.jpg",
+            ingredients: [
+                "6 feuilles de menthe.",
+                "1/2 citron vert.",
+                "2 cuillères à café de sucre.",
+                "4cl de rhum blanc.",
+                "Eau gazeuse.",
+                "Glaçons."
+            ],
+            preparation: [
+                "Pilez les feuilles de menthe avec le sucre et le jus du citron vert.",
+                "Ajoutez le rhum et mélangez.",
+                "Remplissez le verre de glaçons.",
+                "Complétez avec de l'eau gazeuse.",
+                "Décorez avec une rondelle de citron vert et une feuille de menthe."
+            ]
+        },
+        'sotb': {
+            title: "Sex On The Beach",
+            image: "sotb.jpeg",
+            ingredients: [
+                "4cl de Vodka",
+                "2cl de Liqueur de pêche",
+                "6cl Cranberry",
+                "6cl de Jus d'orange"
+            ],
+            preparation: [
+                "Dans un verre, versez la vodka, la liqueur de pêche puis le jus d'orange.",
+                "Terminer par ajouter le jus de cranberry pour créer un effet dégradé.",
+                "Ajoutez doucement des glaçons."
+            ]
+        },
+        'punch': {
+            title: "Punch",
+            image: "punch.jpeg",
+            ingredients: [
+                "1 litre de jus d'orange",
+                "1 litre de jus d'ananas",
+                "750 ml de rhum",
+                "200 ml de sirop de grenadine"
+            ],
+            preparation: [
+                "Dans un grand saladier, mélangez le jus d'orange, le jus d'ananas, le rhum puis la grenadine.",
+                "Laissez reposer au réfrigérateur pendant au moins 2 heures avant de servir.",
+                "Servez le punch bien frais, avec des glaçons et décorez chaque verre avec une tranche de fruit."
+            ]
+        },
+        'tequila': {
+            title: "Tequila sunrise",
+            image: "tequila.jpg",
+            ingredients: [
+                "4cl de Tequila",
+                "12cl de Jus d'orange",
+                "2cl de Sirop de grenadine"
+            ],
+            preparation: [
+                "Versez la tequila dans un verre.",
+                "Ajoutez le jus d'orange.",
+                "Versez doucement la grenadine pour créer un effet dégradé puis ajouter doucement quelques glaçons."
+            ]
+        }
+    };
+
+    const count = Object.keys(recipes).length;
+    const countElement = document.getElementById('recipe-count');
+    if (countElement) {
+        countElement.textContent = `${count} recettes disponibles`;
+    }
+
+    // Navigation réactive
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('header nav a');
+
+    function highlightNav() {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    // On garde le rounded-md mais on change juste les couleurs
+                    link.classList.remove('bg-amber-500', 'text-white');
+                    if (link.getAttribute('href') === '#' + sectionId) {
+                        link.classList.add('bg-amber-500', 'text-white');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightNav);
+    highlightNav(); // Appel initial
+
+    // Fonction pour ouvrir la recette
+    window.openRecipe = function (recipeId) {
+        const recipe = recipes[recipeId];
+        if (!recipe) return;
+
+        // Gestion de l'affichage de la source
+        const sourceElement = document.getElementById('recipeSource');
+        if (recipe.source) {
+            // Vérifier si la source contient du HTML (comme un lien)
+            if (recipe.source.includes('<a')) {
+                sourceElement.innerHTML = `Source : ${recipe.source}`;
+            } else {
+                sourceElement.textContent = `Source : ${recipe.source}`;
+            }
+            sourceElement.classList.remove('hidden');
+        } else {
+            sourceElement.classList.add('hidden');
+        }
+
+        document.getElementById('recipeTitle').textContent = recipe.title;
+        document.getElementById('recipeImage').src = recipe.image;
+        document.getElementById('recipeImage').alt = recipe.title;
+
+        const ingredientsList = document.getElementById('ingredientsList');
+        ingredientsList.innerHTML = '';
+
+        recipe.ingredients.forEach(item => {
+            const element = document.createElement('li');
+
+            if (typeof item === 'object' && item.type === 'subtitle') {
+                // Pour les sous-titres : pas de puce et en gras
+                element.innerHTML = `<strong class="block mt-3 mb-1">${item.text}</strong>`;
+                element.classList.remove('list-disc');
+                element.style.listStyleType = 'none';
+            } else if (typeof item === 'object' && item.type === 'ingredient') {
+                // Pour les ingrédients normaux
+                element.textContent = item.text;
+            } else {
+                // Pour la compatibilité avec l'ancien format
+                element.textContent = item;
+            }
+
+            ingredientsList.appendChild(element);
+        });
+
+        const preparationSteps = document.getElementById('preparationSteps');
+        preparationSteps.innerHTML = recipe.preparation.map(s => `<li>${s}</li>`).join('');
+
+        document.getElementById('recipePopup').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    };
+
+    // Fonction pour fermer la recette
+    window.closeRecipe = function () {
+        document.getElementById('recipePopup').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    };
+
+    // Gestion des onglets dans le popup recette
+    document.getElementById('ingredientsTab').addEventListener('click', () => {
+        document.getElementById('ingredientsContent').classList.remove('hidden');
+        document.getElementById('preparationContent').classList.add('hidden');
+
+        // Ajout/suppression des classes pour le trait orange
+        document.getElementById('ingredientsTab').classList.add('border-b-2', 'border-amber-500', 'text-black');
+        document.getElementById('ingredientsTab').classList.remove('text-gray-500', 'border-b-0');
+        document.getElementById('preparationTab').classList.remove('border-b-2', 'border-amber-500', 'text-black');
+        document.getElementById('preparationTab').classList.add('text-gray-500', 'border-b-0');
+    });
+
+    document.getElementById('preparationTab').addEventListener('click', () => {
+        document.getElementById('ingredientsContent').classList.add('hidden');
+        document.getElementById('preparationContent').classList.remove('hidden');
+
+        // Ajout/suppression des classes pour le trait orange
+        document.getElementById('preparationTab').classList.add('border-b-2', 'border-amber-500', 'text-black');
+        document.getElementById('preparationTab').classList.remove('text-gray-500', 'border-b-0');
+        document.getElementById('ingredientsTab').classList.remove('border-b-2', 'border-amber-500', 'text-black');
+        document.getElementById('ingredientsTab').classList.add('text-gray-500', 'border-b-0');
+    });
+
+    // Fonction de défilement doux pour les liens d'ancrage
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Ajouter cet event listener pour gérer le clic en dehors du popup
+    document.getElementById('recipePopup').addEventListener('click', function (event) {
+        // Si l'utilisateur clique sur l'arrière-plan (le div avec l'id recipePopup)
+        // et non sur le contenu du popup lui-même
+        if (event.target === this) {
+            closeRecipe();
+        }
+    });
+
+    // Savoureux logo et retour en haut
+    document.querySelector('header nav div.text-2xl').addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    document.getElementById('brand-title').addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Compter le nombre de recettes par catégorie
+    function updateRecipeCounts() {
+        const platsCount = document.querySelectorAll('#plats-section .recipe-card').length;
+        const dessertsCount = document.querySelectorAll('#desserts-section .recipe-card').length;
+        const boissonsCount = document.querySelectorAll('#boissons-section .recipe-card').length;
+
+        document.getElementById('plats-count').textContent = `${platsCount} recettes`;
+        document.getElementById('desserts-count').textContent = `${dessertsCount} recettes`;
+        document.getElementById('boissons-count').textContent = `${boissonsCount} recettes`;
+    }
+
+    updateRecipeCounts();
+});
